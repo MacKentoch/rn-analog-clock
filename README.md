@@ -27,13 +27,19 @@ react-native link
 ### import AnalogClock
 ```javascript
 import AnalogClock from 'react-native-analog-clock';
-// minimalist use:
+// minimalist use (a bit ugly):
 
 // in your render()
 render() {
   return (
     <AnalogClock
-      style={{width: 150, height: 150}}
+      style={{
+        width: 150,
+        height: 150
+      }}
+      onTimeChange={
+        ({hours, minutes, seconds}) => console.log(`time is now : ${hours}:${minutes}:${seconds}`)
+      }
     />    
   );
 }
