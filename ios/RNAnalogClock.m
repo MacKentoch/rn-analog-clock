@@ -10,6 +10,10 @@
 #import "RCTConvert.h"
 
 BOOL const DEFAULT_IS_ANIMATED = YES;
+CGFloat const DEFAULT_SMALL_GRADUATION_LENGTH = 5.0;
+CGFloat const DEFAULT_HIGH_GRADUATION_LENGTH = 10.0;
+CGFloat const DEFAULT_SMALL_GRADUATION_WIDTH = 1.0;
+CGFloat const DEFAULT_HIGH_GRADUATION_WIDTH = 2.0;
 
 @implementation RNAnalogClock {
   BOOL _animated;
@@ -24,13 +28,34 @@ BOOL const DEFAULT_IS_ANIMATED = YES;
 {
   self = [super initWithFrame:frame];
   if (self) {
-    [self initWithDefaultConfig:DEFAULT_IS_ANIMATED];
+    [self initWithDefaultConfig:DEFAULT_IS_ANIMATED
+          smallGraduationLength:DEFAULT_SMALL_GRADUATION_LENGTH
+           highGraduationLength:DEFAULT_HIGH_GRADUATION_LENGTH
+           smallGraduationWidth:DEFAULT_SMALL_GRADUATION_WIDTH
+            highGraduationWidth:DEFAULT_HIGH_GRADUATION_WIDTH
+           smallGraduationColor:[UIColor colorWithRed:(241.0/255.0)
+                                                green:241.0/255.0
+                                                 blue:241.0/255.0
+                                                alpha:1.0
+                                 ]
+            highGraduationColor:[UIColor colorWithRed:241.0/255.0
+                                                green:241.0/255.0
+                                                 blue:241.0/255.0
+                                                alpha:1.0
+                                 ]
+     ];
   }
   return self;
 }
 
 
--(void) initWithDefaultConfig:(BOOL)animated {
+-(void) initWithDefaultConfig: (BOOL) animated
+        smallGraduationLength:(CGFloat)smallGraduationLength
+         highGraduationLength:(CGFloat)highGraduationLength
+         smallGraduationWidth:(CGFloat)smallGraduationWidth
+          highGraduationWidth:(CGFloat) highGraduationWidth
+         smallGraduationColor:(UIColor *) smallGraduationColor
+          highGraduationColor:(UIColor*) highGraduationColor {
   NSLog(@"initWithDefaultConfig called");
   _animated = animated;
 }

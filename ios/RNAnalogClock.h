@@ -6,10 +6,17 @@
 //  Copyright © 2016 Facebook. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "RCTComponent.h"
 #import "BEMAnalogClockView.h"
 
+
 extern BOOL const DEFAULT_IS_ANIMATED;
+
+extern CGFloat const smallGraduationLength; //= 5.0
+extern CGFloat const highGraduationLength;  //: CGFloat! = 10.0
+extern CGFloat const smallGraduationWidth;  //: CGFloat! = 1.0
+extern CGFloat const highGraduationWidth;   //: CGFloat! = 2.0
 
 @interface RNAnalogClock: BEMAnalogClockView
 
@@ -120,8 +127,13 @@ extern BOOL const DEFAULT_IS_ANIMATED;
 //////////////////////////////
 //----- Initialization -----//
 //////////////////////////////
--(void) initWithDefaultConfig: (BOOL) animated;
-
+-(void) initWithDefaultConfig: (BOOL) animated
+        smallGraduationLength:(CGFloat)smallGraduationLength
+         highGraduationLength:(CGFloat)highGraduationLength
+         smallGraduationWidth:(CGFloat)smallGraduationWidth
+          highGraduationWidth:(CGFloat) highGraduationWidth
+         smallGraduationColor:(UIColor *) smallGraduationColor
+          highGraduationColor:(UIColor*) highGraduationColor;
 
 ///////////////////////////////////
 //----- reload clock action -----//

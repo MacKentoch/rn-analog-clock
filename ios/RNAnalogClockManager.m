@@ -24,6 +24,7 @@
 
 RCT_EXPORT_MODULE()
 
+#pragma mark - view return
 - (UIView *)view
 {
   _AnalogClock = [[RNAnalogClock alloc] init];
@@ -32,6 +33,7 @@ RCT_EXPORT_MODULE()
 }
 
 #pragma mark BEMAnalogClockDelegate
+//----- TIME -----//
 - (void)currentTimeOnClock:(BEMAnalogClockView *)clock
                      Hours:(NSString *)hours
                    Minutes:(NSString *)minutes
@@ -46,6 +48,40 @@ RCT_EXPORT_MODULE()
                             });
 }
 
+//----- CLOCK EVENTS -----//
+/** Sent to the delegate each time the clock is loaded or reloaded.
+ @param clock The clock object that is about to be loaded or reloaded. */
+- (void)clockDidBeginLoading:(BEMAnalogClockView *)clock {
+  NSLog(@"clockDidBeginLoading event");
+}
+
+/** Sent to the delegate each time the clock finishes loading or reloading. Note that the animation is not finished at this point in time.
+ @param clock The clock object that finished loading or reloading. */
+- (void)clockDidFinishLoading:(BEMAnalogClockView *)clock {
+  NSLog(@"clockDidFinishLoading event");
+}
+
+
+//----- GRADUATION CUSTOMIZATION -----//
+- (CGFloat)analogClock:(BEMAnalogClockView *)clock graduationLengthForIndex:(NSInteger)index {
+  int modulo5 = (index + 1) % 5; // every 5 graduations
+  if (modulo5 == 1) {
+    return 10.0;
+  } else {
+    return 5.0;
+  }
+}
+
+- (CGFloat)analogClock:(BEMAnalogClockView *)clock graduationWidthForIndex:(NSInteger)index {
+  int modulo5 = (index + 1) % 5; // every 5 graduations
+  if (modulo5 == 1) {
+    return 2.0;
+  } else {
+    return 1.0;
+  }
+}
+
+#pragma mark - properties export
 /////////////////////////////////
 //----- EVENTS SEND TO JS -----//
 /////////////////////////////////
@@ -153,6 +189,7 @@ RCT_EXPORT_VIEW_PROPERTY(bridgeHubAlpha, CGFloat);
 /// The width of the clock's hub. Default value is 3.0.
 RCT_EXPORT_VIEW_PROPERTY(bridgeHubRadius, CGFloat);
 
+#pragma mark - methods export
 ///////////////////////////////
 //----- JS side actions -----//
 ///////////////////////////////
