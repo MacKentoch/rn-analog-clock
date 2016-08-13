@@ -1,5 +1,9 @@
 # react-native-analog-clock
 
+
+*__IMPORTANT__* : Work in progress (*at early stage*), stay tuned!
+
+
 ##### React native analog clock as a nice alternative to traditional timepicker.
 
 This component is a bridge over `native`  [BEMAnalogClock](https://github.com/Boris-Em/BEMAnalogClock)
@@ -7,7 +11,6 @@ This component is a bridge over `native`  [BEMAnalogClock](https://github.com/Bo
 - customizable
 - native behind (*JS thread will thank you later *:smile:)
 
-*__IMPORTANT__* : Work in progress (*at early stage*), stay tuned!
 
 ## Getting started
 
@@ -23,8 +26,19 @@ react-native link
 
 ### import AnalogClock
 ```javascript
+import AnalogClock from 'react-native-analog-clock';
+// minimalist use:
 
+// in your render()
+render() {
+  return (
+    <AnalogClock
+      style={{width: 150, height: 150}}
+    />    
+  );
+}
 ```
+*follow the example for more details*
 
 *coming soon*
 
