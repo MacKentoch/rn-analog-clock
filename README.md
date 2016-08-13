@@ -11,6 +11,21 @@ This component is a bridge over `native`  [BEMAnalogClock](https://github.com/Bo
 
 ## Getting started
 
+### install
+```bash
+npm i --save react-native-analog-clock
+```
+
+### link
+```bash
+react-native link
+```
+
+### import AnalogClock
+```javascript
+
+```
+
 *coming soon*
 
 ## to add

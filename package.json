@@ -1,6 +1,6 @@
 {
   "name": "react-native-analog-clock",
-    "repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/MacKentoch/rn-analog-clock.git"
   },
@@ -19,5 +19,8 @@
     "time",
     "picker",
     "timepicker"
-  ]
+  ],
+  "devDependencies": {
+    "react-native": "^0.31.0"
+  }
 }

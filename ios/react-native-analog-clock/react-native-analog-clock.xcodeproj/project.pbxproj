@@ -1,0 +1,292 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0DA0D75A1D5FA776005382B0 /* react_native_analog_clock.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0DA0D7591D5FA776005382B0 /* react_native_analog_clock.h */; };
+		0DA0D75C1D5FA776005382B0 /* react_native_analog_clock.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA0D75B1D5FA776005382B0 /* react_native_analog_clock.m */; };
+		0DA0D76A1D5FA7A6005382B0 /* BEMAnalogClockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA0D7631D5FA7A6005382B0 /* BEMAnalogClockView.m */; };
+		0DA0D76B1D5FA7A6005382B0 /* KSMHand.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA0D7651D5FA7A6005382B0 /* KSMHand.m */; };
+		0DA0D76C1D5FA7A6005382B0 /* RNAnalogClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA0D7671D5FA7A6005382B0 /* RNAnalogClock.m */; };
+		0DA0D76D1D5FA7A6005382B0 /* RNAnalogClockManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA0D7691D5FA7A6005382B0 /* RNAnalogClockManager.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0DA0D7541D5FA776005382B0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				0DA0D75A1D5FA776005382B0 /* react_native_analog_clock.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0DA0D7561D5FA776005382B0 /* libreact-native-analog-clock.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libreact-native-analog-clock.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DA0D7591D5FA776005382B0 /* react_native_analog_clock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = react_native_analog_clock.h; sourceTree = "<group>"; };
+		0DA0D75B1D5FA776005382B0 /* react_native_analog_clock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = react_native_analog_clock.m; sourceTree = "<group>"; };
+		0DA0D7621D5FA7A6005382B0 /* BEMAnalogClockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAnalogClockView.h; sourceTree = "<group>"; };
+		0DA0D7631D5FA7A6005382B0 /* BEMAnalogClockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAnalogClockView.m; sourceTree = "<group>"; };
+		0DA0D7641D5FA7A6005382B0 /* KSMHand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSMHand.h; sourceTree = "<group>"; };
+		0DA0D7651D5FA7A6005382B0 /* KSMHand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMHand.m; sourceTree = "<group>"; };
+		0DA0D7661D5FA7A6005382B0 /* RNAnalogClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNAnalogClock.h; sourceTree = "<group>"; };
+		0DA0D7671D5FA7A6005382B0 /* RNAnalogClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNAnalogClock.m; sourceTree = "<group>"; };
+		0DA0D7681D5FA7A6005382B0 /* RNAnalogClockManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNAnalogClockManager.h; sourceTree = "<group>"; };
+		0DA0D7691D5FA7A6005382B0 /* RNAnalogClockManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNAnalogClockManager.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0DA0D7531D5FA776005382B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0DA0D74D1D5FA776005382B0 = {
+			isa = PBXGroup;
+			children = (
+				0DA0D7581D5FA776005382B0 /* react-native-analog-clock */,
+				0DA0D7571D5FA776005382B0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0DA0D7571D5FA776005382B0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0DA0D7561D5FA776005382B0 /* libreact-native-analog-clock.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0DA0D7581D5FA776005382B0 /* react-native-analog-clock */ = {
+			isa = PBXGroup;
+			children = (
+				0DA0D76E1D5FA7AF005382B0 /* BEMAnalogClock */,
+				0DA0D7661D5FA7A6005382B0 /* RNAnalogClock.h */,
+				0DA0D7671D5FA7A6005382B0 /* RNAnalogClock.m */,
+				0DA0D7681D5FA7A6005382B0 /* RNAnalogClockManager.h */,
+				0DA0D7691D5FA7A6005382B0 /* RNAnalogClockManager.m */,
+				0DA0D7591D5FA776005382B0 /* react_native_analog_clock.h */,
+				0DA0D75B1D5FA776005382B0 /* react_native_analog_clock.m */,
+			);
+			path = "react-native-analog-clock";
+			sourceTree = "<group>";
+		};
+		0DA0D76E1D5FA7AF005382B0 /* BEMAnalogClock */ = {
+			isa = PBXGroup;
+			children = (
+				0DA0D7621D5FA7A6005382B0 /* BEMAnalogClockView.h */,
+				0DA0D7631D5FA7A6005382B0 /* BEMAnalogClockView.m */,
+				0DA0D7641D5FA7A6005382B0 /* KSMHand.h */,
+				0DA0D7651D5FA7A6005382B0 /* KSMHand.m */,
+			);
+			name = BEMAnalogClock;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0DA0D7551D5FA776005382B0 /* react-native-analog-clock */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DA0D75F1D5FA776005382B0 /* Build configuration list for PBXNativeTarget "react-native-analog-clock" */;
+			buildPhases = (
+				0DA0D7521D5FA776005382B0 /* Sources */,
+				0DA0D7531D5FA776005382B0 /* Frameworks */,
+				0DA0D7541D5FA776005382B0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "react-native-analog-clock";
+			productName = "react-native-analog-clock";
+			productReference = 0DA0D7561D5FA776005382B0 /* libreact-native-analog-clock.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0DA0D74E1D5FA776005382B0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Erwan DATIN";
+				TargetAttributes = {
+					0DA0D7551D5FA776005382B0 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = 0DA0D7511D5FA776005382B0 /* Build configuration list for PBXProject "react-native-analog-clock" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0DA0D74D1D5FA776005382B0;
+			productRefGroup = 0DA0D7571D5FA776005382B0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0DA0D7551D5FA776005382B0 /* react-native-analog-clock */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0DA0D7521D5FA776005382B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DA0D76C1D5FA7A6005382B0 /* RNAnalogClock.m in Sources */,
+				0DA0D76B1D5FA7A6005382B0 /* KSMHand.m in Sources */,
+				0DA0D76D1D5FA7A6005382B0 /* RNAnalogClockManager.m in Sources */,
+				0DA0D76A1D5FA7A6005382B0 /* BEMAnalogClockView.m in Sources */,
+				0DA0D75C1D5FA776005382B0 /* react_native_analog_clock.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0DA0D75D1D5FA776005382B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0DA0D75E1D5FA776005382B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0DA0D7601D5FA776005382B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		0DA0D7611D5FA776005382B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(SRCROOT)/../../node_modules/react-native/React",
+					"$(SRCROOT)/../../../react-native/React",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0DA0D7511D5FA776005382B0 /* Build configuration list for PBXProject "react-native-analog-clock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DA0D75D1D5FA776005382B0 /* Debug */,
+				0DA0D75E1D5FA776005382B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DA0D75F1D5FA776005382B0 /* Build configuration list for PBXNativeTarget "react-native-analog-clock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DA0D7601D5FA776005382B0 /* Debug */,
+				0DA0D7611D5FA776005382B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0DA0D74E1D5FA776005382B0 /* Project object */;
+}
