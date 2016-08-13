@@ -19,9 +19,7 @@ BOOL const DEFAULT_IS_ANIMATED = YES;
   NSInteger _currentSeconds;
 }
 
-////////////////////////////
-//----- INITIALIZERS -----//
-////////////////////////////
+#pragma mark - Initialization
 - (instancetype)initWithFrame:(CGRect)frame
 {
   self = [super initWithFrame:frame];
@@ -37,9 +35,7 @@ BOOL const DEFAULT_IS_ANIMATED = YES;
   _animated = animated;
 }
 
-//////////////////////////////////
-//----- PROPERTIES SETTERS -----//
-//////////////////////////////////
+#pragma mark - properties setters
 -(void) setBridgeHours: (NSInteger)hours {
   self.hours = hours;
   [self updateTimeAnimated: _animated];
@@ -95,9 +91,7 @@ BOOL const DEFAULT_IS_ANIMATED = YES;
   [self reloadClock];
 }
 
-//////////////////////////////////////////////////
-//----- CLOCK'S FACE CUSTOMIZATION SETTERS -----//
-//////////////////////////////////////////////////
+#pragma mark - clock's face customization setters
 -(void) setBridgeBorderWidth: (CGFloat)width {
   self.borderWidth = width;
   [self reloadClock];
@@ -133,9 +127,7 @@ BOOL const DEFAULT_IS_ANIMATED = YES;
   [self reloadClock];
 }
 
-////////////////////////////////////////
-//----- HOURS HAND CUSTOMIZATION -----//
-////////////////////////////////////////
+#pragma mark - hours hand customization setters
 -(void) setBridgeHourHandColor: (NSNumber*) color {
   self.hourHandColor = [RCTConvert UIColor: color];
   [self reloadClock];
@@ -161,9 +153,7 @@ BOOL const DEFAULT_IS_ANIMATED = YES;
   [self reloadClock];
 }
 
-//////////////////////////////////////////
-//----- MINUTES HAND CUSTOMIZATION -----//
-//////////////////////////////////////////
+#pragma mark - minutes hand customization setters
 -(void) setBridgeMinuteHandColor: (NSNumber*) color {
   self.minuteHandColor = [RCTConvert UIColor: color];
   [self reloadClock];
@@ -189,9 +179,7 @@ BOOL const DEFAULT_IS_ANIMATED = YES;
   [self reloadClock];
 }
 
-//////////////////////////////////////////
-//----- SECONDS HAND CUSTOMIZATION -----//
-//////////////////////////////////////////
+#pragma mark - seconds hand customization setters
 -(void) setBridgeSecondHandColor: (NSNumber*) color {
   self.secondHandColor = [RCTConvert UIColor: color];
   [self reloadClock];
@@ -216,5 +204,30 @@ BOOL const DEFAULT_IS_ANIMATED = YES;
   self.secondHandOffsideLength = offsideLength;
   [self reloadClock];
 }
+
+#pragma mark - hub customization setters
+-(void) setBridgeHubColor: (NSNumber*) color {
+  self.hubColor = [RCTConvert UIColor: color];
+  [self reloadClock];
+}
+
+-(void) setBridgeHubAlpha: (CGFloat) alpha {
+  self.hubAlpha = alpha;
+  [self reloadClock];
+}
+
+-(void) setBridgeHubRadius: (CGFloat) radius {
+  self.hubRadius = radius;
+  [self reloadClock];
+}
+
+#pragma mark - JS side actions
+-(void) reloadRealTime {
+  if (self.realTimeIsActivated == YES) {
+    [self setClockToCurrentTimeAnimated: YES];
+  }
+  [self startRealTime];
+}
+
 
 @end

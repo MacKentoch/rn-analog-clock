@@ -6,11 +6,17 @@
 //  Copyright © 2016 Facebook. All rights reserved.
 //
 
+#import "RCTComponent.h"
 #import "BEMAnalogClockView.h"
 
 extern BOOL const DEFAULT_IS_ANIMATED;
 
 @interface RNAnalogClock: BEMAnalogClockView
+
+///////////////////////////////////
+//----- EVENTS (send to JS) -----//
+///////////////////////////////////
+@property (nonatomic, copy) RCTBubblingEventBlock onClockTick;
 
 //////////////////////////////////
 //----- GENERAL PROPERTIES -----//
@@ -110,10 +116,16 @@ extern BOOL const DEFAULT_IS_ANIMATED;
 
 
 
-/////////////////////////////////
-//----- HUB CUSTOMIZATION -----//
-/////////////////////////////////
+
+//////////////////////////////
+//----- Initialization -----//
+//////////////////////////////
 -(void) initWithDefaultConfig: (BOOL) animated;
 
+
+///////////////////////////////////
+//----- reload clock action -----//
+///////////////////////////////////
+-(void) reloadRealTime;
 
 @end

@@ -9,6 +9,8 @@
 
 #import "RNAnalogClock.h"
 #import "RNAnalogClockManager.h"
+#import "RCTBridge.h"
+#import "RCTUIManager.h"
 #import "RCTViewManager.h"
 #import "UIView+React.h"
 
@@ -16,14 +18,38 @@
 
 @end
 
-@implementation RNAnalogClockManager
+@implementation RNAnalogClockManager {
+  RNAnalogClock* _AnalogClock;
+}
 
 RCT_EXPORT_MODULE()
 
 - (UIView *)view
 {
-  return [[RNAnalogClock alloc] init];
+  _AnalogClock = [[RNAnalogClock alloc] init];
+  _AnalogClock.delegate = self;
+  return _AnalogClock;
 }
+
+#pragma mark BEMAnalogClockDelegate
+- (void)currentTimeOnClock:(BEMAnalogClockView *)clock
+                     Hours:(NSString *)hours
+                   Minutes:(NSString *)minutes
+                   Seconds:(NSString *)seconds {
+  if (!_AnalogClock.onClockTick) {
+    return;
+  }
+  _AnalogClock.onClockTick(@{
+                             @"hours": hours,
+                             @"minutes": minutes,
+                             @"seconds": seconds
+                            });
+}
+
+/////////////////////////////////
+//----- EVENTS SEND TO JS -----//
+/////////////////////////////////
+RCT_EXPORT_VIEW_PROPERTY(onClockTick, RCTBubblingEventBlock);
 
 /// READ ONLY : If set to YES, the clock real time feature is activated.
 RCT_EXPORT_VIEW_PROPERTY(realTimeIsActivated, BOOL)
@@ -126,5 +152,23 @@ RCT_EXPORT_VIEW_PROPERTY(bridgeHubColor, NSNumber);
 RCT_EXPORT_VIEW_PROPERTY(bridgeHubAlpha, CGFloat);
 /// The width of the clock's hub. Default value is 3.0.
 RCT_EXPORT_VIEW_PROPERTY(bridgeHubRadius, CGFloat);
+
+///////////////////////////////
+//----- JS side actions -----//
+///////////////////////////////
+/// Start the real time feature. The clock will be updated in real time (the second hand will move every second, the minute one every minute and the hour one every hour).
+RCT_EXPORT_METHOD(startRealTime) {
+  [_AnalogClock startRealTime];
+};
+
+/// Stops the real time feature. The clock will not move anymore.
+RCT_EXPORT_METHOD(stopRealTime) {
+  [_AnalogClock stopRealTime];
+};
+
+/// restart clock and (if real time is activated) FORCE to update to real time - with animation - to current time (startRealTimeClock mehtod would just resume from where it was stopped)
+RCT_EXPORT_METHOD(reloadRealTime) {
+  [_AnalogClock reloadRealTime];
+};
 
 @end

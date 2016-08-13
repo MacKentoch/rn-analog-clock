@@ -4,24 +4,22 @@ import React , {
 }                           from 'react';
 import {
   requireNativeComponent,
-  // NativeModules,
+  NativeModules,
   processColor,
   View
 }                           from 'react-native';
 
 const RNAnalogClock = requireNativeComponent(
   'RNAnalogClock',
-  AnalogClock
-  // ,
-  // {
-  //   nativeOnly: {
-  //     onClockTick: true
-  //   }
-  // }
+  AnalogClock,
+  {
+    nativeOnly: {
+      onClockTick: true
+    }
+  }
 );
 
-
-// const AnalogClockManager = NativeModules.RNAnalogClock;
+const AnalogClockManager = NativeModules.RNAnalogClockManager;
 
 class AnalogClock extends Component {
   constructor(props) {
@@ -139,15 +137,15 @@ class AnalogClock extends Component {
   }
 
   startRealTimeClock() {
-    // AnalogClockManager.startRealTimeClock();
+    AnalogClockManager.startRealTime();
   }
 
   stopRealTimeClock() {
-    // AnalogClockManager.stopRealTimeClock();
+    AnalogClockManager.stopRealTime();
   }
 
   reloadRealTimeClock() {
-    // AnalogClockManager.reloadRealTimeClock();
+    AnalogClockManager.reloadRealTime();
   }
 
   formatInto2Digits(num) {
