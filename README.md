@@ -1,3 +1,4 @@
+[![npm](https://img.shields.io/npm/v/npm.svg?maxAge=2592000)](https://github.com/MacKentoch/rn-analog-clock)
 # react-native-analog-clock
 
 
@@ -12,6 +13,9 @@ This component is a bridge over `native`  [BEMAnalogClock](https://github.com/Bo
 - native behind
 
 > NOTE: this native bridge is an `Objective-C` bridge. A `Swift` bridge version — *not published and just for technical comparison experience* — is available [here](https://github.com/MacKentoch/react-native-analog-clock)
+
+![preview from example]()
+
 
 ## Getting started
 
