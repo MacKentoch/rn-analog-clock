@@ -1,7 +1,7 @@
 # react-native-analog-clock
 
 
-*__IMPORTANT__* : Work in progress (*at early stage*), stay tuned!
+*__IMPORTANT__* : **Work in progress** (*at early stage*), stay tuned!
 
 
 ##### React native analog clock as a nice alternative to traditional timepicker.
@@ -9,8 +9,9 @@
 This component is a bridge over `native`  [BEMAnalogClock](https://github.com/Boris-Em/BEMAnalogClock)
 - Adjust the time on the clock via touch (or disable it)
 - customizable
-- native behind (*JS thread will thank you later *:smile:)
+- native behind
 
+> NOTE: this native bridge is an `Objective-C` bridge. A `Swift` bridge version — *not published and just for technical comparison experience* — is available [here](https://github.com/MacKentoch/react-native-analog-clock)
 
 ## Getting started
 
@@ -46,9 +47,9 @@ render() {
 ```
 *follow the example for more details*
 
-*coming soon*
 
-## to add
+## Next?
+### to add
 - [ ] add => JS side defaultProps
 - [x] add => `hub` customization props bridge
 - [ ] add => `digit font` prop bridge
@@ -56,5 +57,6 @@ render() {
 - [ ] add => `graduations width` prop bridge
 - [ ] add => `graduations color` prop bridge
 
-## to fix
+### to fix
 - [ ] fix =>  `digit color` dynamic change throws error (*only initial assignment is ok*)
+- [ ] fix => perf.
