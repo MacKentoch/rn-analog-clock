@@ -72,6 +72,14 @@ class AnalogClock extends Component {
       hubColor,
       hubAlpha,
       hubRadius,
+      // GRADUATIONS CUSTOMIZATION
+      accentGraduationModulo,
+      bridgeHighGraduationColor,
+      bridgeSmallGraduationColor,
+      highGraduationWidth,
+      smallGraduationWidth,
+      highGraduationLength,
+      smallGraduationLength,
 
       ...otherProps
     } = this.props;
@@ -122,6 +130,14 @@ class AnalogClock extends Component {
       bridgeHubColor={processColor(hubColor)}
       bridgeHubAlpha={parseFloat(hubAlpha) ? parseFloat(hubAlpha) : 1.0}
       bridgeHubRadius={parseFloat(hubRadius) ? parseFloat(hubRadius) : 3.0}
+      // GRADUATIONS CUSTOMIZATION
+      // accentGraduationModulo={parseInt(accentGraduationModulo, 10) ? parseInt(accentGraduationModulo, 10) : 5}
+      // bridgeHighGraduationColor={processColor(bridgeHighGraduationColor)}
+      // bridgeSmallGraduationColor={processColor(bridgeSmallGraduationColor)}
+      // highGraduationWidth={parseFloat(highGraduationWidth) ? parseFloat(highGraduationWidth) : 2.0}
+      // smallGraduationWidth={parseFloat(smallGraduationWidth) ? parseFloat(smallGraduationWidth) : 1.0}
+      // highGraduationLength={parseFloat(highGraduationLength) ? parseFloat(highGraduationLength) : 10.0}
+      // smallGraduationLength={parseFloat(smallGraduationLength) ? parseFloat(smallGraduationLength) : 5.0}
       {...otherProps}
     />
     );
@@ -254,6 +270,24 @@ AnalogClock.propTypes = {
   hubAlpha: PropTypes.number,
   /// The width of the clock's hub. Default value is 3.0.
   hubRadius: PropTypes.number,
+
+  /////////////////////////////////////////
+  //----- GRADUATIONS CUSTOMIZATION -----//
+  /////////////////////////////////////////
+  /// The index modulo to accent graduations (= 5 by default)
+  accentGraduationModulo: PropTypes.number,
+  /// The color of the accented graduations (every accentGraduationModulo graduations)
+  bridgeHighGraduationColor: PropTypes.string,
+  /// The color of the non accented graduations (every accentGraduationModulo graduations)
+  bridgeSmallGraduationColor: PropTypes.string,
+  /// The width of the accented graduations (every accentGraduationModulo graduations)
+  highGraduationWidth: PropTypes.number,
+  /// The width of the non accented graduations (every accentGraduationModulo graduations)
+  smallGraduationWidth: PropTypes.number,
+  /// The length of the accented graduations (every accentGraduationModulo graduations)
+  highGraduationLength: PropTypes.number,
+  /// The length of the non accented graduations (every accentGraduationModulo graduations)
+  smallGraduationLength: PropTypes.number,
 
   ///////////////////////////////////////////////////////
   // Read only props (so no need to bridge native one) //

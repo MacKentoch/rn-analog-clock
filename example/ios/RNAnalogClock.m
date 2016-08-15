@@ -29,16 +29,8 @@
            highGraduationLength: 10.0
            smallGraduationWidth: 1.0
             highGraduationWidth: 2.0
-           smallGraduationColor: [UIColor colorWithRed:(241.0/255.0)
-                                                green:241.0/255.0
-                                                 blue:241.0/255.0
-                                                alpha:1.0
-                                 ]
-            highGraduationColor: [UIColor colorWithRed:241.0/255.0
-                                                green:241.0/255.0
-                                                 blue:241.0/255.0
-                                                alpha:1.0
-                                 ]
+           smallGraduationColor: [UIColor whiteColor]
+            highGraduationColor: [UIColor whiteColor]
      ];
   }
   return self;
@@ -46,21 +38,21 @@
 
 
 -(void) initWithDefaultConfig: (BOOL) animated
-       accentGraduationModulo: (NSInteger) accentGraduationModulo
+       accentGraduationModulo: (int) accentGraduationModulo
         smallGraduationLength: (CGFloat) smallGraduationLength
          highGraduationLength: (CGFloat) highGraduationLength
          smallGraduationWidth: (CGFloat) smallGraduationWidth
           highGraduationWidth: (CGFloat) highGraduationWidth
          smallGraduationColor: (UIColor *) smallGraduationColor
-          highGraduationColor: (UIColor*) highGraduationColor {
+          highGraduationColor: (UIColor *) highGraduationColor {
   _animated = animated;
   _accentGraduationModulo = accentGraduationModulo;
   _highGraduationColor = highGraduationColor;
   _smallGraduationColor = smallGraduationColor;
-  _bridgeHighGraduationWidth = highGraduationWidth;
-  _bridgeSmallGraduationWidth = smallGraduationWidth;
-  _bridgeHighGraduationLength = highGraduationLength;
-  _bridgeSmallGraduationLength = smallGraduationLength;
+  _highGraduationWidth = highGraduationWidth;
+  _smallGraduationWidth = smallGraduationWidth;
+  _highGraduationLength = highGraduationLength;
+  _smallGraduationLength = smallGraduationLength;
 }
 
 #pragma mark - properties setters
@@ -250,7 +242,7 @@
 }
 
 #pragma mark - graduation customization setters
--(void) setAccentGraduationModulo:(NSInteger)modulo {
+-(void) setAccentGraduationModulo:(int)modulo {
   self.accentGraduationModulo = modulo;
   [self reloadClock];
 }
@@ -266,22 +258,22 @@
 }
 
 -(void) setBridgeHighGraduationWidth:(CGFloat)width {
-  self.bridgeHighGraduationWidth = width;
+  self.highGraduationWidth = width;
   [self reloadClock];
 }
 
 -(void) setBridgeSmallGraduationWidth:(CGFloat)width {
-  self.bridgeSmallGraduationWidth = width;
+  self.smallGraduationWidth = width;
   [self reloadClock];
 }
 
 -(void) setBridgeHighGraduationLength:(CGFloat)length {
-  self.bridgeHighGraduationLength = length;
+  self.highGraduationLength = length;
   [self reloadClock];
 }
 
 -(void) setBridgeSmallGraduationLength:(CGFloat)length {
-  self.bridgeSmallGraduationLength = length;
+  self.smallGraduationLength = length;
   [self reloadClock];
 }
 

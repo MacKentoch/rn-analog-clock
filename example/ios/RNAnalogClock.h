@@ -117,7 +117,7 @@
 //----- GRADUATIONS CUSTOMIZATION -----//
 /////////////////////////////////////////
 /// The index modulo to accent graduations (= 5 by default)
-@property (nonatomic, assign) NSInteger accentGraduationModulo;
+@property (nonatomic, assign) int accentGraduationModulo;
 /// The color of the accented graduations (every accentGraduationModulo graduations)
 @property (nonatomic, assign) UIColor * highGraduationColor; // property
 @property (nonatomic, assign) NSNumber* bridgeHighGraduationColor; // bridged property since UIColor does not exists in JS world
@@ -125,20 +125,20 @@
 @property (nonatomic, assign) UIColor * smallGraduationColor; // property
 @property (nonatomic, assign) NSNumber* bridgeSmallGraduationColor; // bridged property since UIColor does not exists in JS world
 /// The width of the accented graduations (every accentGraduationModulo graduations)
-@property (nonatomic, assign) CGFloat bridgeHighGraduationWidth;
+@property (nonatomic, assign) CGFloat highGraduationWidth;
 /// The width of the non accented graduations (every accentGraduationModulo graduations)
-@property (nonatomic, assign) CGFloat bridgeSmallGraduationWidth;
+@property (nonatomic, assign) CGFloat smallGraduationWidth;
 /// The length of the accented graduations (every accentGraduationModulo graduations)
-@property (nonatomic, assign) CGFloat bridgeHighGraduationLength;
+@property (nonatomic, assign) CGFloat highGraduationLength;
 /// The length of the non accented graduations (every accentGraduationModulo graduations)
-@property (nonatomic, assign) CGFloat bridgeSmallGraduationLength;
+@property (nonatomic, assign) CGFloat smallGraduationLength;
 
 
 //////////////////////////////
 //----- Initialization -----//
 //////////////////////////////
 -(void) initWithDefaultConfig: (BOOL) animated
-       accentGraduationModulo: (NSInteger) accentGraduationModulo
+       accentGraduationModulo: (int) accentGraduationModulo
         smallGraduationLength: (CGFloat) smallGraduationLength
          highGraduationLength: (CGFloat) highGraduationLength
          smallGraduationWidth: (CGFloat) smallGraduationWidth

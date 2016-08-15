@@ -5,7 +5,7 @@
  * @flow-disabled
  */
 
-/*eslint no-shadow: ["error", { "allow": ["hours", "minutes", "seconds"] }]*/
+/*eslint no-shadow: ["error", { "allow": ["hours", "minutes", "seconds", "demoConfigParameters"] }]*/
 
 import React, { Component } from 'react';
 import {
@@ -21,64 +21,50 @@ import {
 }                           from 'react-native';
 import AnalogClock          from './AnalogClock';
 
-const MIN_BORDER_WIDTH = 0;
-const MAX_BORDER_WIDTH = 20;
+const GroupTitle = ({ title }) => {
+  return (
+    <View style={styles.groupCommandTitle}>
+      <Text style={styles.groupCommandText}>
+        { title }
+      </Text>
+    </View>
+  );
+};
 
-const MIN_BORDER_ALPHA = 0.0;
-const MAX_BORDER_ALPHA = 1.0;
+const TextInputCommand = ({ title, value, onChangeText }) => {
+  return (
+    <View style={styles.command}>
+      <Text style={styles.cmdInfo}>
+        {title}
+      </Text>
+      <TextInput
+        style={[styles.cmdInput, styles.textInput]}
+        onChangeText={onChangeText}
+        value={value}
+      />
+    </View>
+  );
+};
 
-const MIN_BRIDGE_DIGIT_OFFSET = -20;
-const MAX_BRIDGE_DIGIT_OFFSET = 20;
-
-const MIN_FACE_BACKGROUND_ALPHA = 0.0;
-const MAX_FACE_BACKGROUND_ALPHA = 1.0;
-
-const MIN_HOUR_HAND_ALPHA = 0.0;
-const MAX_HOUR_HAND_ALPHA = 1.0;
-
-const MIN_HOUR_HAND_WIDTH = 0.0;
-const MAX_HOUR_HAND_WIDTH = 20.0;
-
-const MIN_HOUR_HAND_LENGTH = 0.0;
-const MAX_HOUR_HAND_LENGTH = 100.0;
-
-const MIN_HOUR_HAND_OFFSIDE_LENGTH = 0.0;
-const MAX_HOUR_HAND_OFFSIDE_LENGTH = 100.0;
-
-const MIN_MINUTE_HAND_ALPHA = 0.0;
-const MAX_MINUTE_HAND_ALPHA = 1.0;
-
-const MIN_MINUTE_HAND_WIDTH = 0.0;
-const MAX_MINUTE_HAND_WIDTH = 20.0;
-
-const MIN_MINUTE_HAND_LENGTH = 0.0;
-const MAX_MINUTE_HAND_LENGTH = 100.0;
-
-const MIN_MINUTE_HAND_OFFSIDE_LENGTH = 0.0;
-const MAX_MINUTE_HAND_OFFSIDE_LENGTH = 100.0;
-
-const MIN_SECOND_HAND_ALPHA = 0.0;
-const MAX_SECOND_HAND_ALPHA = 1.0;
-
-const MIN_SECOND_HAND_WIDTH = 0.0;
-const MAX_SECOND_HAND_WIDTH = 20.0;
-
-const MIN_SECOND_HAND_LENGTH = 0.0;
-const MAX_SECOND_HAND_LENGTH = 100.0;
-
-const MIN_SECOND_HAND_OFFSIDE_LENGTH = 0.0;
-const MAX_SECOND_HAND_OFFSIDE_LENGTH = 100.0;
-
-const MIN_HUB_ALPHA = 0.0;
-const MAX_HUB_ALPHA = 1.0;
-
-const MIN_HUB_RADIUS = 0.0;
-const MAX_HUB_RADIUS = 20.0;
+const SwitchCommand = ({ title, value, onValueChange }) => {
+  return (
+    <View style={styles.command}>
+      <Text style={styles.cmdInfo}>
+        {title}
+      </Text>
+      <Switch
+        onValueChange={onValueChange}
+        value={value}
+      />
+    </View>
+  );
+};
 
 class AnalogClockDEMO extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      demoConfigParameters: demoConfigParameters(),
       currentHours: 0,
       currentMinutes: 0,
       currentSeconds: 0,
@@ -117,7 +103,14 @@ class AnalogClockDEMO extends Component {
       secondHandOffsideLength: 20.0,
       hubColor: '#F1F1F1',
       hubAlpha: 1,
-      hubRadius: 3
+      hubRadius: 3,
+      accentGraduationModulo: 5,
+      bridgeHighGraduationColor: '#F1F1F1',
+      bridgeSmallGraduationColor: '#F1F1F1',
+      highGraduationWidth: 2.0,
+      smallGraduationWidth: 1.0,
+      highGraduationLength: 10.0,
+      smallGraduationLength: 5.0
     };
     this.handlesOnStartPress = this.handlesOnStartPress.bind(this);
     this.handlesOnStopPress = this.handlesOnStopPress.bind(this);
@@ -125,6 +118,7 @@ class AnalogClockDEMO extends Component {
   }
 
   render() {
+    const { demoConfigParameters } = this.state;
     const { hours, minutes, seconds } = this.state;
     const { currentHours, currentMinutes, currentSeconds } = this.state;
     const { enableShadows, realTime, militaryTime, currentTime, enableDigit, setTimeViaTouch, enableGraduations, enableHub } = this.state;
@@ -135,6 +129,7 @@ class AnalogClockDEMO extends Component {
     const { minuteHandColor, minuteHandAlpha, minuteHandWidth, minuteHandLength, minuteHandOffsideLength } = this.state;
     const { secondHandColor, secondHandAlpha, secondHandWidth, secondHandLength, secondHandOffsideLength } = this.state;
     const { hubColor, hubAlpha, hubRadius } = this.state;
+    const { accentGraduationModulo, bridgeHighGraduationColor, bridgeSmallGraduationColor, highGraduationWidth, smallGraduationWidth, highGraduationLength, smallGraduationLength } = this.state;
     return (
       <View style={styles.container}>
         <Text style={styles.title}>
@@ -227,153 +222,111 @@ class AnalogClockDEMO extends Component {
             hubColor={hubColor}
             hubAlpha={hubAlpha}
             hubRadius={hubRadius}
+            // GRADUATIONS CUSTOMIZATION
+            accentGraduationModulo={accentGraduationModulo}
+            bridgeHighGraduationColor={bridgeHighGraduationColor}
+            bridgeSmallGraduationColor={bridgeSmallGraduationColor}
+            highGraduationWidth={highGraduationWidth}
+            smallGraduationWidth={smallGraduationWidth}
+            highGraduationLength={highGraduationLength}
+            smallGraduationLength={smallGraduationLength}
           />
         </View>
 
         <ScrollView style={styles.commandsPanel}>
           {/* PROPERTIES */}
-          <View style={styles.groupCommandTitle}>
-            <Text style={styles.groupCommandText}>
-              GENERAL PROPERTIES
-            </Text>
-          </View>
 
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              manual set "hours"
-            </Text>
-            <TextInput
-              style={[styles.cmdInput, styles.textInput]}
-              onChangeText={(text) => this.setState({hours: parseInt(text, 10) % 12})}
-              value={this.state.hours + ''}
-            />
-          </View>
+          <GroupTitle
+            title={'GENERAL PROPERTIES'}
+          />
 
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              manual set "minutes"
-            </Text>
-            <TextInput
-              style={[styles.cmdInput, styles.textInput]}
-              onChangeText={(text) => this.setState({minutes: parseInt(text, 10) % 60})}
-              value={this.state.minutes + ''}
-            />
-          </View>
+          <TextInputCommand
+            title={'manual set "hours"'}
+            onChangeText={(text) => this.setState({hours: parseInt(text, 10) % 12})}
+            value={this.state.hours + ''}
+          />
 
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              manual set "seconds"
-            </Text>
-            <TextInput
-              style={[styles.cmdInput, styles.textInput]}
-              onChangeText={(text) => this.setState({seconds: parseInt(text, 10) % 60})}
-              value={this.state.seconds + ''}
-            />
-          </View>
+          <TextInputCommand
+            title={'manual set "minutes"'}
+            onChangeText={(text) => this.setState({minutes: parseInt(text, 10) % 60})}
+            value={this.state.minutes + ''}
+          />
 
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              setTimeViaTouch
-            </Text>
-            <Switch
-              onValueChange={(value) => this.setState({setTimeViaTouch: value})}
-              value={this.state.setTimeViaTouch}
-            />
-          </View>
+          <TextInputCommand
+            title={'manual set "seconds"'}
+            onChangeText={(text) => this.setState({seconds: parseInt(text, 10) % 60})}
+            value={this.state.seconds + ''}
+          />
 
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              currentTime
-            </Text>
-            <Switch
-              onValueChange={(value) => this.setState({currentTime: value})}
-              value={this.state.currentTime}
-            />
-          </View>
+          <SwitchCommand
+            title={'setTimeViaTouch'}
+            value={this.state.setTimeViaTouch}
+            onValueChange={(value) => this.setState({setTimeViaTouch: value})}
+          />
 
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              realTime
-            </Text>
-            <Switch
-              onValueChange={(value) => this.setState({realTime: value})}
-              value={this.state.realTime}
-            />
-          </View>
+          <SwitchCommand
+            title={'currentTime'}
+            value={this.state.currentTime}
+            onValueChange={(value) => this.setState({currentTime: value})}
+          />
 
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              militaryTime
-            </Text>
-            <Switch
-              onValueChange={(value) => this.setState({militaryTime: value})}
-              value={this.state.militaryTime}
-            />
-          </View>
+          <SwitchCommand
+            title={'realTime'}
+            value={this.state.realTime}
+            onValueChange={(value) => this.setState({realTime: value})}
+          />
 
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              enableShadows
-            </Text>
-            <Switch
-              onValueChange={(value) => this.setState({enableShadows: value})}
-              value={this.state.enableShadows}
-            />
-          </View>
+          <SwitchCommand
+            title={'militaryTime'}
+            value={this.state.militaryTime}
+            onValueChange={(value) => this.setState({militaryTime: value})}
+          />
 
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              enableGraduations
-            </Text>
-            <Switch
-              onValueChange={(value) => this.setState({enableGraduations: value})}
-              value={this.state.enableGraduations}
-            />
-          </View>
+          <SwitchCommand
+            title={'enableShadows'}
+            value={this.state.enableShadows}
+            onValueChange={(value) => this.setState({enableShadows: value})}
+          />
 
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              enableHub
-            </Text>
-            <Switch
-              onValueChange={(value) => this.setState({enableHub: value})}
-              value={this.state.enableHub}
-            />
-          </View>
+          <SwitchCommand
+            title={'enableGraduations'}
+            value={this.state.enableGraduations}
+            onValueChange={(value) => this.setState({enableGraduations: value})}
+          />
 
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              enableDigit
-            </Text>
-            <Switch
-              onValueChange={(value) => this.setState({enableDigit: value})}
-              value={this.state.enableDigit}
-            />
-          </View>
+          <SwitchCommand
+            title={'enableHub'}
+            value={this.state.enableHub}
+            onValueChange={(value) => this.setState({enableHub: value})}
+          />
+
+          <SwitchCommand
+            title={'enableDigit'}
+            value={this.state.enableDigit}
+            onValueChange={(value) => this.setState({enableDigit: value})}
+          />
 
           {/* CLOCK'S FACE CUSTOMIZATION */}
-          <View style={styles.groupCommandTitle}>
-            <Text style={styles.groupCommandText}>
-              CLOCKS'S FACE CUSTOMIZATION
-            </Text>
-          </View>
+          <GroupTitle
+            title={'CLOCKS\'S FACE CUSTOMIZATION'}
+          />
 
           <View style={styles.command}>
             <Text style={styles.cmdInfo}>
               digitOffset ({(digitOffset + '').slice(0, 6)})
             </Text>
             <Text>
-              {MIN_BRIDGE_DIGIT_OFFSET}
+              {demoConfigParameters.MIN_BRIDGE_DIGIT_OFFSET}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_BRIDGE_DIGIT_OFFSET}
-              maximumValue={MAX_BRIDGE_DIGIT_OFFSET}
+              minimumValue={demoConfigParameters.MIN_BRIDGE_DIGIT_OFFSET}
+              maximumValue={demoConfigParameters.MAX_BRIDGE_DIGIT_OFFSET}
               onValueChange={(value) => this.setState({digitOffset: value })}
               value={this.state.digitOffset}
             />
             <Text>
-              {MAX_BRIDGE_DIGIT_OFFSET}
+              {demoConfigParameters.MAX_BRIDGE_DIGIT_OFFSET}
             </Text>
           </View>
 
@@ -393,17 +346,17 @@ class AnalogClockDEMO extends Component {
               borderWidth ({(borderWidth + '').slice(0, 6)})
             </Text>
             <Text>
-              {MIN_BORDER_WIDTH}
+              {demoConfigParameters.MIN_BORDER_WIDTH}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_BORDER_WIDTH}
-              maximumValue={MAX_BORDER_WIDTH}
+              minimumValue={demoConfigParameters.MIN_BORDER_WIDTH}
+              maximumValue={demoConfigParameters.MAX_BORDER_WIDTH}
               onValueChange={(value) => this.setState({borderWidth: value })}
               value={this.state.borderWidth}
             />
             <Text>
-              {MAX_BORDER_WIDTH}
+              {demoConfigParameters.MAX_BORDER_WIDTH}
             </Text>
           </View>
 
@@ -423,17 +376,17 @@ class AnalogClockDEMO extends Component {
               borderAlpha ({(borderAlpha + '').slice(0, 4)})
             </Text>
             <Text>
-              {MIN_BORDER_ALPHA}
+              {demoConfigParameters.MIN_BORDER_ALPHA}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_BORDER_ALPHA}
-              maximumValue={MAX_BORDER_ALPHA}
+              minimumValue={demoConfigParameters.MIN_BORDER_ALPHA}
+              maximumValue={demoConfigParameters.MAX_BORDER_ALPHA}
               onValueChange={(value) => this.setState({borderAlpha: value })}
               value={this.state.borderAlpha}
             />
             <Text>
-              {MAX_BORDER_ALPHA}
+              {demoConfigParameters.MAX_BORDER_ALPHA}
             </Text>
           </View>
 
@@ -453,17 +406,17 @@ class AnalogClockDEMO extends Component {
               faceBackgroundAlpha ({(faceBackgroundAlpha + '').slice(0,4)})
             </Text>
             <Text>
-              {MIN_FACE_BACKGROUND_ALPHA}
+              {demoConfigParameters.MIN_FACE_BACKGROUND_ALPHA}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_FACE_BACKGROUND_ALPHA}
-              maximumValue={MAX_FACE_BACKGROUND_ALPHA}
+              minimumValue={demoConfigParameters.MIN_FACE_BACKGROUND_ALPHA}
+              maximumValue={demoConfigParameters.MAX_FACE_BACKGROUND_ALPHA}
               onValueChange={(value) => this.setState({faceBackgroundAlpha: value })}
               value={this.state.faceBackgroundAlpha}
             />
             <Text>
-              {MAX_FACE_BACKGROUND_ALPHA}
+              {demoConfigParameters.MAX_FACE_BACKGROUND_ALPHA}
             </Text>
           </View>
 
@@ -491,17 +444,17 @@ class AnalogClockDEMO extends Component {
               hourHandAlpha ({(hourHandAlpha + '').slice(0, 4)})
             </Text>
             <Text>
-              {MIN_HOUR_HAND_ALPHA}
+              {demoConfigParameters.MIN_HOUR_HAND_ALPHA}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_HOUR_HAND_ALPHA}
-              maximumValue={MAX_HOUR_HAND_ALPHA}
+              minimumValue={demoConfigParameters.MIN_HOUR_HAND_ALPHA}
+              maximumValue={demoConfigParameters.MAX_HOUR_HAND_ALPHA}
               onValueChange={(value) => this.setState({hourHandAlpha: value })}
               value={this.state.hourHandAlpha}
             />
             <Text>
-              {MAX_HOUR_HAND_ALPHA}
+              {demoConfigParameters.MAX_HOUR_HAND_ALPHA}
             </Text>
           </View>
           {/* hourHandWidth */}
@@ -510,17 +463,17 @@ class AnalogClockDEMO extends Component {
               hourHandWidth ({(hourHandWidth + '').slice(0, 4)})
             </Text>
             <Text>
-              {MIN_HOUR_HAND_WIDTH}
+              {demoConfigParameters.MIN_HOUR_HAND_WIDTH}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_HOUR_HAND_WIDTH}
-              maximumValue={MAX_HOUR_HAND_WIDTH}
+              minimumValue={demoConfigParameters.MIN_HOUR_HAND_WIDTH}
+              maximumValue={demoConfigParameters.MAX_HOUR_HAND_WIDTH}
               onValueChange={(value) => this.setState({hourHandWidth: value })}
               value={this.state.hourHandWidth}
             />
             <Text>
-              {MAX_HOUR_HAND_WIDTH}
+              {demoConfigParameters.MAX_HOUR_HAND_WIDTH}
             </Text>
           </View>
           {/* hourHandLength */}
@@ -529,17 +482,17 @@ class AnalogClockDEMO extends Component {
               hourHandLength ({(hourHandLength + '').slice(0, 4)})
             </Text>
             <Text>
-              {MIN_HOUR_HAND_LENGTH}
+              {demoConfigParameters.MIN_HOUR_HAND_LENGTH}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_HOUR_HAND_LENGTH}
-              maximumValue={MAX_HOUR_HAND_LENGTH}
+              minimumValue={demoConfigParameters.MIN_HOUR_HAND_LENGTH}
+              maximumValue={demoConfigParameters.MAX_HOUR_HAND_LENGTH}
               onValueChange={(value) => this.setState({hourHandLength: value })}
               value={this.state.hourHandLength}
             />
             <Text>
-              {MAX_HOUR_HAND_LENGTH}
+              {demoConfigParameters.MAX_HOUR_HAND_LENGTH}
             </Text>
           </View>
           {/* hourHandOffsideLength */}
@@ -548,17 +501,17 @@ class AnalogClockDEMO extends Component {
               hourHandOffsideLength ({(hourHandOffsideLength + '').slice(0, 4)})
             </Text>
             <Text>
-              {MIN_HOUR_HAND_OFFSIDE_LENGTH}
+              {demoConfigParameters.MIN_HOUR_HAND_OFFSIDE_LENGTH}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_HOUR_HAND_OFFSIDE_LENGTH}
-              maximumValue={MAX_HOUR_HAND_OFFSIDE_LENGTH}
+              minimumValue={demoConfigParameters.MIN_HOUR_HAND_OFFSIDE_LENGTH}
+              maximumValue={demoConfigParameters.MAX_HOUR_HAND_OFFSIDE_LENGTH}
               onValueChange={(value) => this.setState({hourHandOffsideLength: value })}
               value={this.state.hourHandOffsideLength}
             />
             <Text>
-              {MAX_HOUR_HAND_OFFSIDE_LENGTH}
+              {demoConfigParameters.MAX_HOUR_HAND_OFFSIDE_LENGTH}
             </Text>
           </View>
 
@@ -586,17 +539,17 @@ class AnalogClockDEMO extends Component {
               minuteHandAlpha ({(minuteHandAlpha + '').slice(0, 4)})
             </Text>
             <Text>
-              {MIN_MINUTE_HAND_ALPHA}
+              {demoConfigParameters.MIN_MINUTE_HAND_ALPHA}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_MINUTE_HAND_ALPHA}
-              maximumValue={MAX_MINUTE_HAND_ALPHA}
+              minimumValue={demoConfigParameters.MIN_MINUTE_HAND_ALPHA}
+              maximumValue={demoConfigParameters.MAX_MINUTE_HAND_ALPHA}
               onValueChange={(value) => this.setState({minuteHandAlpha: value })}
               value={this.state.minuteHandAlpha}
             />
             <Text>
-              {MAX_MINUTE_HAND_ALPHA}
+              {demoConfigParameters.MAX_MINUTE_HAND_ALPHA}
             </Text>
           </View>
           {/* minuteHandWidth */}
@@ -605,17 +558,17 @@ class AnalogClockDEMO extends Component {
               minuteHandWidth ({(minuteHandWidth + '').slice(0, 4)})
             </Text>
             <Text>
-              {MIN_MINUTE_HAND_WIDTH}
+              {demoConfigParameters.MIN_MINUTE_HAND_WIDTH}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_MINUTE_HAND_WIDTH}
-              maximumValue={MAX_MINUTE_HAND_WIDTH}
+              minimumValue={demoConfigParameters.MIN_MINUTE_HAND_WIDTH}
+              maximumValue={demoConfigParameters.MAX_MINUTE_HAND_WIDTH}
               onValueChange={(value) => this.setState({minuteHandWidth: value })}
               value={this.state.minuteHandWidth}
             />
             <Text>
-              {MAX_MINUTE_HAND_WIDTH}
+              {demoConfigParameters.MAX_MINUTE_HAND_WIDTH}
             </Text>
           </View>
           {/* minuteHandLength */}
@@ -624,17 +577,17 @@ class AnalogClockDEMO extends Component {
               minuteHandLength ({(minuteHandLength + '').slice(0, 4)})
             </Text>
             <Text>
-              {MIN_MINUTE_HAND_LENGTH}
+              {demoConfigParameters.MIN_MINUTE_HAND_LENGTH}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_MINUTE_HAND_LENGTH}
-              maximumValue={MAX_MINUTE_HAND_LENGTH}
+              minimumValue={demoConfigParameters.MIN_MINUTE_HAND_LENGTH}
+              maximumValue={demoConfigParameters.MAX_MINUTE_HAND_LENGTH}
               onValueChange={(value) => this.setState({minuteHandLength: value })}
               value={this.state.minuteHandLength}
             />
             <Text>
-              {MAX_MINUTE_HAND_LENGTH}
+              {demoConfigParameters.MAX_MINUTE_HAND_LENGTH}
             </Text>
           </View>
           {/* minuteHandOffsideLength */}
@@ -643,17 +596,17 @@ class AnalogClockDEMO extends Component {
               minuteHandOffsideLength ({(minuteHandOffsideLength + '').slice(0, 4)})
             </Text>
             <Text>
-              {MIN_MINUTE_HAND_OFFSIDE_LENGTH}
+              {demoConfigParameters.MIN_MINUTE_HAND_OFFSIDE_LENGTH}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_MINUTE_HAND_OFFSIDE_LENGTH}
-              maximumValue={MAX_MINUTE_HAND_OFFSIDE_LENGTH}
+              minimumValue={demoConfigParameters.MIN_MINUTE_HAND_OFFSIDE_LENGTH}
+              maximumValue={demoConfigParameters.MAX_MINUTE_HAND_OFFSIDE_LENGTH}
               onValueChange={(value) => this.setState({minuteHandOffsideLength: value })}
               value={this.state.minuteHandOffsideLength}
             />
             <Text>
-              {MAX_MINUTE_HAND_OFFSIDE_LENGTH}
+              {demoConfigParameters.MAX_MINUTE_HAND_OFFSIDE_LENGTH}
             </Text>
           </View>
 
@@ -681,17 +634,17 @@ class AnalogClockDEMO extends Component {
               secondHandAlpha ({(secondHandAlpha + '').slice(0, 4)})
             </Text>
             <Text>
-              {MIN_SECOND_HAND_ALPHA}
+              {demoConfigParameters.MIN_SECOND_HAND_ALPHA}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_SECOND_HAND_ALPHA}
-              maximumValue={MAX_SECOND_HAND_ALPHA}
+              minimumValue={demoConfigParameters.MIN_SECOND_HAND_ALPHA}
+              maximumValue={demoConfigParameters.MAX_SECOND_HAND_ALPHA}
               onValueChange={(value) => this.setState({secondHandAlpha: value })}
               value={this.state.secondHandAlpha}
             />
             <Text>
-              {MAX_SECOND_HAND_ALPHA}
+              {demoConfigParameters.MAX_SECOND_HAND_ALPHA}
             </Text>
           </View>
           {/* secondHandWidth */}
@@ -700,17 +653,17 @@ class AnalogClockDEMO extends Component {
               secondHandWidth ({(secondHandWidth + '').slice(0, 4)})
             </Text>
             <Text>
-              {MIN_SECOND_HAND_WIDTH}
+              {demoConfigParameters.MIN_SECOND_HAND_WIDTH}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_SECOND_HAND_WIDTH}
-              maximumValue={MAX_SECOND_HAND_WIDTH}
+              minimumValue={demoConfigParameters.MIN_SECOND_HAND_WIDTH}
+              maximumValue={demoConfigParameters.MAX_SECOND_HAND_WIDTH}
               onValueChange={(value) => this.setState({secondHandWidth: value })}
               value={this.state.secondHandWidth}
             />
             <Text>
-              {MAX_SECOND_HAND_WIDTH}
+              {demoConfigParameters.MAX_SECOND_HAND_WIDTH}
             </Text>
           </View>
           {/* secondHandLength */}
@@ -719,17 +672,17 @@ class AnalogClockDEMO extends Component {
               secondHandLength ({(secondHandLength + '').slice(0, 4)})
             </Text>
             <Text>
-              {MIN_SECOND_HAND_LENGTH}
+              {demoConfigParameters.MIN_SECOND_HAND_LENGTH}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_SECOND_HAND_LENGTH}
-              maximumValue={MAX_SECOND_HAND_LENGTH}
+              minimumValue={demoConfigParameters.MIN_SECOND_HAND_LENGTH}
+              maximumValue={demoConfigParameters.MAX_SECOND_HAND_LENGTH}
               onValueChange={(value) => this.setState({secondHandLength: value })}
               value={this.state.secondHandLength}
             />
             <Text>
-              {MAX_SECOND_HAND_LENGTH}
+              {demoConfigParameters.MAX_SECOND_HAND_LENGTH}
             </Text>
           </View>
           {/* secondHandOffsideLength */}
@@ -738,17 +691,17 @@ class AnalogClockDEMO extends Component {
               secondHandOffsideLength ({(secondHandOffsideLength + '').slice(0, 4)})
             </Text>
             <Text>
-              {MIN_SECOND_HAND_OFFSIDE_LENGTH}
+              {demoConfigParameters.MIN_SECOND_HAND_OFFSIDE_LENGTH}
             </Text>
             <Slider
               style={styles.sliders}
-              minimumValue={MIN_SECOND_HAND_OFFSIDE_LENGTH}
-              maximumValue={MAX_SECOND_HAND_OFFSIDE_LENGTH}
+              minimumValue={demoConfigParameters.MIN_SECOND_HAND_OFFSIDE_LENGTH}
+              maximumValue={demoConfigParameters.MAX_SECOND_HAND_OFFSIDE_LENGTH}
               onValueChange={(value) => this.setState({secondHandOffsideLength: value })}
               value={this.state.secondHandOffsideLength}
             />
             <Text>
-              {MAX_SECOND_HAND_OFFSIDE_LENGTH}
+              {demoConfigParameters.MAX_SECOND_HAND_OFFSIDE_LENGTH}
             </Text>
           </View>
 
@@ -776,6 +729,84 @@ class AnalogClockDEMO extends Component {
               hubAlpha ({(hubAlpha + '').slice(0, 4)})
             </Text>
             <Text>
+              {demoConfigParameters.MIN_HUB_ALPHA}
+            </Text>
+            <Slider
+              style={styles.sliders}
+              minimumValue={demoConfigParameters.MIN_HUB_ALPHA}
+              maximumValue={demoConfigParameters.MAX_HUB_ALPHA}
+              onValueChange={(value) => this.setState({hubAlpha: value })}
+              value={this.state.hubAlpha}
+            />
+            <Text>
+              {demoConfigParameters.MAX_HUB_ALPHA}
+            </Text>
+          </View>
+          {/* hubRadius */}
+          <View style={styles.command}>
+            <Text style={styles.cmdInfo}>
+              hubRadius ({(hubRadius + '').slice(0, 4)})
+            </Text>
+            <Text>
+              {demoConfigParameters.MIN_HUB_RADIUS}
+            </Text>
+            <Slider
+              style={styles.sliders}
+              minimumValue={demoConfigParameters.MIN_HUB_RADIUS}
+              maximumValue={demoConfigParameters.MAX_HUB_RADIUS}
+              onValueChange={(value) => this.setState({hubRadius: value })}
+              value={this.state.hubRadius}
+            />
+            <Text>
+              {demoConfigParameters.MAX_HUB_RADIUS}
+            </Text>
+          </View>
+
+          {/* GRADUATIONS CUSTOMIZATION */}
+          {/* title */}
+          <View style={styles.groupCommandTitle}>
+            <Text style={styles.groupCommandText}>
+              GRADUATIONS CUSTOMIZATION
+            </Text>
+          </View>
+          {/* accentGraduationModulo */}
+          <View style={styles.command}>
+            <Text style={styles.cmdInfo}>
+              accentGraduationModulo ({(accentGraduationModulo + '')})
+            </Text>
+            <Text>
+              {demoConfigParameters.MIN_GRADUATION_ACCENT_MODULO}
+            </Text>
+            <Slider
+              style={styles.sliders}
+              step={1}
+              minimumValue={demoConfigParameters.MIN_GRADUATION_ACCENT_MODULO}
+              maximumValue={demoConfigParameters.MAX_GRADUATION_ACCENT_MODULO}
+              onValueChange={(value) => this.setState({accentGraduationModulo: value })}
+              value={this.state.hubAlpha}
+            />
+            <Text>
+              {demoConfigParameters.MAX_GRADUATION_ACCENT_MODULO}
+            </Text>
+          </View>
+          {/* hubColor */}
+          {/* <View style={styles.command}>
+            <Text style={styles.cmdInfo}>
+              hubColor
+            </Text>
+            <TextInput
+              style={[styles.cmdInput, styles.textInput]}
+              onChangeText={(text) => this.setState({hubColor: text})}
+              value={this.state.hubColor}
+            />
+          </View> */}
+
+          {/* hubAlpha */}
+          {/* <View style={styles.command}>
+            <Text style={styles.cmdInfo}>
+              hubAlpha ({(hubAlpha + '').slice(0, 4)})
+            </Text>
+            <Text>
               {MIN_HUB_ALPHA}
             </Text>
             <Slider
@@ -788,26 +819,8 @@ class AnalogClockDEMO extends Component {
             <Text>
               {MAX_HUB_ALPHA}
             </Text>
-          </View>
-          {/* hubRadius */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              hubRadius ({(hubRadius + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {MIN_HUB_RADIUS}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={MIN_HUB_RADIUS}
-              maximumValue={MAX_HUB_RADIUS}
-              onValueChange={(value) => this.setState({hubRadius: value })}
-              value={this.state.hubRadius}
-            />
-            <Text>
-              {MAX_HUB_RADIUS}
-            </Text>
-          </View>
+          </View> */}
+
 
         </ScrollView>
       </View>
@@ -831,6 +844,49 @@ class AnalogClockDEMO extends Component {
       this.analogClock.reloadRealTimeClock();
     }
   }
+}
+
+function demoConfigParameters() {
+  return {
+    MIN_BORDER_WIDTH: 0,
+    MAX_BORDER_WIDTH: 20,
+    MIN_BORDER_ALPHA: 0.0,
+    MAX_BORDER_ALPHA: 1.0,
+    MIN_BRIDGE_DIGIT_OFFSET: -20,
+    MAX_BRIDGE_DIGIT_OFFSET: 20,
+    MIN_FACE_BACKGROUND_ALPHA: 0.0,
+    MAX_FACE_BACKGROUND_ALPHA: 1.0,
+    MIN_HOUR_HAND_ALPHA: 0.0,
+    MAX_HOUR_HAND_ALPHA: 1.0,
+    MIN_HOUR_HAND_WIDTH: 0.0,
+    MAX_HOUR_HAND_WIDTH: 20.0,
+    MIN_HOUR_HAND_LENGTH: 0.0,
+    MAX_HOUR_HAND_LENGTH: 100.0,
+    MIN_HOUR_HAND_OFFSIDE_LENGTH: 0.0,
+    MAX_HOUR_HAND_OFFSIDE_LENGTH: 100.0,
+    MIN_MINUTE_HAND_ALPHA: 0.0,
+    MAX_MINUTE_HAND_ALPHA: 1.0,
+    MIN_MINUTE_HAND_WIDTH: 0.0,
+    MAX_MINUTE_HAND_WIDTH: 20.0,
+    MIN_MINUTE_HAND_LENGTH: 0.0,
+    MAX_MINUTE_HAND_LENGTH: 100.0,
+    MIN_MINUTE_HAND_OFFSIDE_LENGTH: 0.0,
+    MAX_MINUTE_HAND_OFFSIDE_LENGTH: 100.0,
+    MIN_SECOND_HAND_ALPHA: 0.0,
+    MAX_SECOND_HAND_ALPHA: 1.0,
+    MIN_SECOND_HAND_WIDTH: 0.0,
+    MAX_SECOND_HAND_WIDTH: 20.0,
+    MIN_SECOND_HAND_LENGTH: 0.0,
+    MAX_SECOND_HAND_LENGTH: 100.0,
+    MIN_SECOND_HAND_OFFSIDE_LENGTH: 0.0,
+    MAX_SECOND_HAND_OFFSIDE_LENGTH: 100.0,
+    MIN_HUB_ALPHA: 0.0,
+    MAX_HUB_ALPHA: 1.0,
+    MIN_HUB_RADIUS: 0.0,
+    MAX_HUB_RADIUS: 20.0,
+    MIN_GRADUATION_ACCENT_MODULO: 0,
+    MAX_GRADUATION_ACCENT_MODULO: 0
+  };
 }
 
 const styles = StyleSheet.create({

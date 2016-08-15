@@ -64,20 +64,29 @@ RCT_EXPORT_MODULE()
 
 //----- GRADUATION CUSTOMIZATION -----//
 - (CGFloat)analogClock:(BEMAnalogClockView *)clock graduationLengthForIndex:(NSInteger)index {
-  int modulo5 = (index + 1) % 5; // every 5 graduations
+  int modulo5 = (index + 1) % _AnalogClock.accentGraduationModulo;
   if (modulo5 == 1) {
-    return 10.0;
+    return _AnalogClock.highGraduationLength;
   } else {
-    return 5.0;
+    return _AnalogClock.smallGraduationLength;
   }
 }
 
 - (CGFloat)analogClock:(BEMAnalogClockView *)clock graduationWidthForIndex:(NSInteger)index {
-  int modulo5 = (index + 1) % 5; // every 5 graduations
+  int modulo5 = (index + 1) % _AnalogClock.accentGraduationModulo;
   if (modulo5 == 1) {
-    return 2.0;
+    return _AnalogClock.highGraduationWidth;
   } else {
-    return 1.0;
+    return _AnalogClock.smallGraduationWidth;
+  }
+}
+
+- (UIColor *)analogClock:(BEMAnalogClockView *)clock graduationColorForIndex:(NSInteger)index {
+  int modulo5 = (index + 1) % _AnalogClock.accentGraduationModulo;
+  if (modulo5 == 1) {
+    return _AnalogClock.highGraduationColor;
+  } else {
+    return _AnalogClock.smallGraduationColor;
   }
 }
 
@@ -199,14 +208,13 @@ RCT_EXPORT_VIEW_PROPERTY(bridgeHighGraduationColor, NSNumber);
 /// The color of the non accented graduations (every accentGraduationModulo graduations)
 RCT_EXPORT_VIEW_PROPERTY(bridgeSmallGraduationColor, NSNumber);
 /// The width of the accented graduations (every accentGraduationModulo graduations)
-RCT_EXPORT_VIEW_PROPERTY(bridgeHighGraduationWidth, CGFloat);
+RCT_EXPORT_VIEW_PROPERTY(highGraduationWidth, CGFloat);
 /// The width of the non accented graduations (every accentGraduationModulo graduations)
-RCT_EXPORT_VIEW_PROPERTY(bridgeSmallGraduationWidth, CGFloat);
+RCT_EXPORT_VIEW_PROPERTY(smallGraduationWidth, CGFloat);
 /// The length of the accented graduations (every accentGraduationModulo graduations)
-RCT_EXPORT_VIEW_PROPERTY(bridgeHighGraduationLength, CGFloat);
+RCT_EXPORT_VIEW_PROPERTY(highGraduationLength, CGFloat);
 /// The length of the non accented graduations (every accentGraduationModulo graduations)
-RCT_EXPORT_VIEW_PROPERTY(bridgeSmallGraduationLength, CGFloat);
-
+RCT_EXPORT_VIEW_PROPERTY(smallGraduationLength, CGFloat);
 
 #pragma mark - methods export
 ///////////////////////////////
