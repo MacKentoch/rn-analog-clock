@@ -18,7 +18,13 @@
     "clock",
     "time",
     "picker",
-    "timepicker"
+    "timepicker",
+    "bridge",
+    "ios",
+    "Objective-C",
+    "Objective C",
+    "objective",
+    "C"
   ],
   "devDependencies": {
     "babel-eslint": "^6.1.2",

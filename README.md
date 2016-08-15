@@ -14,11 +14,13 @@ This component is a bridge over `native`  [BEMAnalogClock](https://github.com/Bo
 
 > NOTE: this native bridge is an `Objective-C` bridge. A `Swift` bridge version — *not published and just for technical comparison experience* — is available [here](https://github.com/MacKentoch/react-native-analog-clock)
 
-![preview from example](/images/previewFromExample.gif)
+<img src="https://raw.githubusercontent.com/MacKentoch/rn-analog-clock/master/images/previewFromExample.gif" alt="preview" width="320px"></img>
 
 *See this full example source [here](https://github.com/MacKentoch/rn-analog-clock/blob/master/example/index.ios.js)*
 
 ## Getting started
+
+**IMPORTANT:** this component is `build with React Native 0.30+` (*not tested with lower versions of RN*).
 
 ### install in your project
 ```bash
@@ -50,7 +52,7 @@ render() {
   );
 }
 ```
-*follow the example for more details*
+*[follow this complete example for more details](https://github.com/MacKentoch/rn-analog-clock/blob/master/example/index.ios.js)*
 
 
 ## Next?

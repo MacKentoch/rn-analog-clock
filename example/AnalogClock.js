@@ -88,7 +88,7 @@ class AnalogClock extends Component {
     return (
     <RNAnalogClock
       onClockTick={this.handlesOnClockTick}
-      PROPERTIES
+      // PROPERTIES
       bridgeHours={parseInt(hours, 10) ? parseInt(hours, 10) % 12 : getDefaultProps().hours}
       bridgeMinutes={parseInt(minutes, 10) ? parseInt(minutes, 10) % 60 : getDefaultProps().minutes}
       bridgeSeconds={parseInt(seconds, 10) ? parseInt(seconds, 10) % 60 : getDefaultProps().seconds}

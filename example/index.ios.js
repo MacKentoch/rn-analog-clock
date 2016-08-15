@@ -21,6 +21,18 @@ import {
 }                           from 'react-native';
 import AnalogClock          from './AnalogClock';
 
+const ButtonCommand = ({ title, buttonStyle, onPress}) => {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.clockCommandButton, buttonStyle]}>
+      <Text style={{color: '#F1F1F1'}}>
+        { title }
+      </Text>
+    </TouchableOpacity>
+  );
+};
+
 const GroupTitle = ({ title }) => {
   return (
     <View style={styles.groupCommandTitle}>
@@ -56,6 +68,44 @@ const SwitchCommand = ({ title, value, onValueChange }) => {
         onValueChange={onValueChange}
         value={value}
       />
+    </View>
+  );
+};
+
+const ColorCommand = ({ title, value, onChange }) => {
+  return (
+    <View style={styles.command}>
+      <Text style={styles.cmdInfo}>
+        {title}
+      </Text>
+      <TextInput
+        style={[styles.cmdInput, styles.textInput]}
+        onChangeText={onChange}
+        value={value}
+      />
+    </View>
+  );
+};
+
+const SliderCommand = ({ title, minimumValue, maximumValue, value, onValueChange }) => {
+  return (
+    <View style={styles.command}>
+      <Text style={styles.cmdInfo}>
+        {title}
+      </Text>
+      <Text>
+        {minimumValue}
+      </Text>
+      <Slider
+        style={styles.sliders}
+        minimumValue={minimumValue}
+        maximumValue={maximumValue}
+        onValueChange={onValueChange}
+        value={value}
+      />
+      <Text>
+        {maximumValue}
+      </Text>
     </View>
   );
 };
@@ -137,27 +187,21 @@ class AnalogClockDEMO extends Component {
         </Text>
         <View style={styles.clockContainer}>
           <View style={styles.clockCommandTopline}>
-            <TouchableOpacity
+            <ButtonCommand
+              title={'START'}
+              buttonStyle={styles.startButton}
               onPress={this.handlesOnStartPress}
-              style={[styles.clockCommandButton, styles.startButton]}>
-              <Text style={{color: '#F1F1F1'}}>
-                START
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            />
+            <ButtonCommand
+              title={'RELOAD'}
+              buttonStyle={styles.reloadButton}
               onPress={this.handlesOnReloadPress}
-              style={[styles.clockCommandButton, styles.reloadButton]}>
-              <Text style={{color: '#F1F1F1'}}>
-                RELOAD
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            />
+            <ButtonCommand
+              title={'STOP'}
+              buttonStyle={styles.stopButton}
               onPress={this.handlesOnStopPress}
-              style={[styles.clockCommandButton, styles.stopButton]}>
-              <Text style={{color: '#F1F1F1'}}>
-                STOP
-              </Text>
-            </TouchableOpacity>
+            />
           </View>
           <Text style={styles.currentTime}>
             {currentHours >= 0 ? currentHours : '--'}
@@ -175,15 +219,6 @@ class AnalogClockDEMO extends Component {
             hours={hours}
             minutes={minutes}
             seconds={seconds}
-            onTimeChange={
-              ({hours, minutes, seconds}) => {
-                this.setState({
-                  currentHours: hours,
-                  currentMinutes: minutes,
-                  currentSeconds: seconds
-                });
-              }
-            }
             enableShadows={enableShadows}
             realTime={realTime}
             militaryTime={militaryTime}
@@ -230,565 +265,290 @@ class AnalogClockDEMO extends Component {
             smallGraduationWidth={smallGraduationWidth}
             highGraduationLength={highGraduationLength}
             smallGraduationLength={smallGraduationLength}
+            // CURRENT TIME CALLBACK
+            onTimeChange={
+              ({hours, minutes, seconds}) => {
+                this.setState({
+                  currentHours: hours,
+                  currentMinutes: minutes,
+                  currentSeconds: seconds
+                });
+              }
+            }
           />
         </View>
 
         <ScrollView style={styles.commandsPanel}>
           {/* PROPERTIES */}
-
           <GroupTitle
             title={'GENERAL PROPERTIES'}
           />
-
           <TextInputCommand
             title={'manual set "hours"'}
             onChangeText={(text) => this.setState({hours: parseInt(text, 10) % 12})}
             value={this.state.hours + ''}
           />
-
           <TextInputCommand
             title={'manual set "minutes"'}
             onChangeText={(text) => this.setState({minutes: parseInt(text, 10) % 60})}
             value={this.state.minutes + ''}
           />
-
           <TextInputCommand
             title={'manual set "seconds"'}
             onChangeText={(text) => this.setState({seconds: parseInt(text, 10) % 60})}
             value={this.state.seconds + ''}
           />
-
           <SwitchCommand
             title={'setTimeViaTouch'}
             value={this.state.setTimeViaTouch}
             onValueChange={(value) => this.setState({setTimeViaTouch: value})}
           />
-
           <SwitchCommand
             title={'currentTime'}
             value={this.state.currentTime}
             onValueChange={(value) => this.setState({currentTime: value})}
           />
-
           <SwitchCommand
             title={'realTime'}
             value={this.state.realTime}
             onValueChange={(value) => this.setState({realTime: value})}
           />
-
           <SwitchCommand
             title={'militaryTime'}
             value={this.state.militaryTime}
             onValueChange={(value) => this.setState({militaryTime: value})}
           />
-
           <SwitchCommand
             title={'enableShadows'}
             value={this.state.enableShadows}
             onValueChange={(value) => this.setState({enableShadows: value})}
           />
-
           <SwitchCommand
             title={'enableGraduations'}
             value={this.state.enableGraduations}
             onValueChange={(value) => this.setState({enableGraduations: value})}
           />
-
           <SwitchCommand
             title={'enableHub'}
             value={this.state.enableHub}
             onValueChange={(value) => this.setState({enableHub: value})}
           />
-
           <SwitchCommand
             title={'enableDigit'}
             value={this.state.enableDigit}
             onValueChange={(value) => this.setState({enableDigit: value})}
           />
-
           {/* CLOCK'S FACE CUSTOMIZATION */}
           <GroupTitle
             title={'CLOCKS\'S FACE CUSTOMIZATION'}
           />
-
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              digitOffset ({(digitOffset + '').slice(0, 6)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_BRIDGE_DIGIT_OFFSET}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_BRIDGE_DIGIT_OFFSET}
-              maximumValue={demoConfigParameters.MAX_BRIDGE_DIGIT_OFFSET}
-              onValueChange={(value) => this.setState({digitOffset: value })}
-              value={this.state.digitOffset}
-            />
-            <Text>
-              {demoConfigParameters.MAX_BRIDGE_DIGIT_OFFSET}
-            </Text>
-          </View>
-
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              digitColor
-            </Text>
-            <TextInput
-              style={[styles.cmdInput, styles.textInput]}
-              onChangeText={(text) => this.setState({digitColor: text})}
-              value={this.state.digitColor}
-            />
-          </View>
-
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              borderWidth ({(borderWidth + '').slice(0, 6)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_BORDER_WIDTH}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_BORDER_WIDTH}
-              maximumValue={demoConfigParameters.MAX_BORDER_WIDTH}
-              onValueChange={(value) => this.setState({borderWidth: value })}
-              value={this.state.borderWidth}
-            />
-            <Text>
-              {demoConfigParameters.MAX_BORDER_WIDTH}
-            </Text>
-          </View>
-
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              borderColor
-            </Text>
-            <TextInput
-              style={[styles.cmdInput, styles.textInput]}
-              onChangeText={(text) => this.setState({borderColor: text})}
-              value={this.state.borderColor}
-            />
-          </View>
-
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              borderAlpha ({(borderAlpha + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_BORDER_ALPHA}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_BORDER_ALPHA}
-              maximumValue={demoConfigParameters.MAX_BORDER_ALPHA}
-              onValueChange={(value) => this.setState({borderAlpha: value })}
-              value={this.state.borderAlpha}
-            />
-            <Text>
-              {demoConfigParameters.MAX_BORDER_ALPHA}
-            </Text>
-          </View>
-
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              faceBackgroundColor
-            </Text>
-            <TextInput
-              style={[styles.cmdInput, styles.textInput]}
-              onChangeText={(text) => this.setState({faceBackgroundColor: text})}
-              value={this.state.faceBackgroundColor}
-            />
-          </View>
-
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              faceBackgroundAlpha ({(faceBackgroundAlpha + '').slice(0,4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_FACE_BACKGROUND_ALPHA}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_FACE_BACKGROUND_ALPHA}
-              maximumValue={demoConfigParameters.MAX_FACE_BACKGROUND_ALPHA}
-              onValueChange={(value) => this.setState({faceBackgroundAlpha: value })}
-              value={this.state.faceBackgroundAlpha}
-            />
-            <Text>
-              {demoConfigParameters.MAX_FACE_BACKGROUND_ALPHA}
-            </Text>
-          </View>
-
+          <SliderCommand
+            title={`digitOffset (${(digitOffset + '').slice(0, 6)})`}
+            minimumValue={demoConfigParameters.MIN_BRIDGE_DIGIT_OFFSET}
+            maximumValue={demoConfigParameters.MAX_BRIDGE_DIGIT_OFFSET}
+            value={digitOffset}
+            onValueChange={(value) => this.setState({digitOffset: value })}
+          />
+          <ColorCommand
+            title={'digitColor'}
+            value={digitColor}
+            onChange={(value) => this.setState({digitColor: value})}
+          />
+          <SliderCommand
+            title={`borderWidth (${(borderWidth + '').slice(0, 6)})`}
+            minimumValue={demoConfigParameters.MIN_BORDER_WIDTH}
+            maximumValue={demoConfigParameters.MAX_BORDER_WIDTH}
+            value={borderWidth}
+            onValueChange={(value) => this.setState({borderWidth: value })}
+          />
+          <ColorCommand
+            title={'borderColor'}
+            value={borderColor}
+            onChange={(value) => this.setState({borderColor: value})}
+          />
+          <SliderCommand
+            title={`borderAlpha (${(borderAlpha + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_BORDER_ALPHA}
+            maximumValue={demoConfigParameters.MAX_BORDER_ALPHA}
+            value={borderAlpha}
+            onValueChange={(value) => this.setState({borderAlpha: value })}
+          />
+          <ColorCommand
+            title={'faceBackgroundColor'}
+            value={faceBackgroundColor}
+            onChange={(value) => this.setState({faceBackgroundColor: value})}
+          />
+          <SliderCommand
+            title={`faceBackgroundAlpha (${(faceBackgroundAlpha + '').slice(0,4)})`}
+            minimumValue={demoConfigParameters.MIN_FACE_BACKGROUND_ALPHA}
+            maximumValue={demoConfigParameters.MAX_FACE_BACKGROUND_ALPHA}
+            value={faceBackgroundAlpha}
+            onValueChange={(value) => this.setState({faceBackgroundAlpha: value })}
+          />
           {/* HOURS HAND CUSTOMIZATION */}
-          {/* title */}
-          <View style={styles.groupCommandTitle}>
-            <Text style={styles.groupCommandText}>
-              HOURS HAND CUSTOMIZATION
-            </Text>
-          </View>
+          <GroupTitle
+            title={'HOURS HAND CUSTOMIZATION'}
+          />
           {/* hourHandColor */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              hourHandColor
-            </Text>
-            <TextInput
-              style={[styles.cmdInput, styles.textInput]}
-              onChangeText={(text) => this.setState({hourHandColor: text})}
-              value={this.state.hourHandColor}
-            />
-          </View>
+          <ColorCommand
+            title={'hourHandColor'}
+            value={hourHandColor}
+            onChange={(value) => this.setState({hourHandColor: value})}
+          />
           {/* hourHandAlpha */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              hourHandAlpha ({(hourHandAlpha + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_HOUR_HAND_ALPHA}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_HOUR_HAND_ALPHA}
-              maximumValue={demoConfigParameters.MAX_HOUR_HAND_ALPHA}
-              onValueChange={(value) => this.setState({hourHandAlpha: value })}
-              value={this.state.hourHandAlpha}
-            />
-            <Text>
-              {demoConfigParameters.MAX_HOUR_HAND_ALPHA}
-            </Text>
-          </View>
+          <SliderCommand
+            title={`hourHandAlpha (${(hourHandAlpha + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_HOUR_HAND_ALPHA}
+            maximumValue={demoConfigParameters.MAX_HOUR_HAND_ALPHA}
+            value={hourHandAlpha}
+            onValueChange={(value) => this.setState({hourHandAlpha: value })}
+          />
           {/* hourHandWidth */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              hourHandWidth ({(hourHandWidth + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_HOUR_HAND_WIDTH}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_HOUR_HAND_WIDTH}
-              maximumValue={demoConfigParameters.MAX_HOUR_HAND_WIDTH}
-              onValueChange={(value) => this.setState({hourHandWidth: value })}
-              value={this.state.hourHandWidth}
-            />
-            <Text>
-              {demoConfigParameters.MAX_HOUR_HAND_WIDTH}
-            </Text>
-          </View>
+          <SliderCommand
+            title={`hourHandWidth (${(hourHandWidth + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_HOUR_HAND_WIDTH}
+            maximumValue={demoConfigParameters.MAX_HOUR_HAND_WIDTH}
+            value={hourHandWidth}
+            onValueChange={(value) => this.setState({hourHandWidth: value })}
+          />
           {/* hourHandLength */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              hourHandLength ({(hourHandLength + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_HOUR_HAND_LENGTH}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_HOUR_HAND_LENGTH}
-              maximumValue={demoConfigParameters.MAX_HOUR_HAND_LENGTH}
-              onValueChange={(value) => this.setState({hourHandLength: value })}
-              value={this.state.hourHandLength}
-            />
-            <Text>
-              {demoConfigParameters.MAX_HOUR_HAND_LENGTH}
-            </Text>
-          </View>
+          <SliderCommand
+            title={`hourHandLength (${(hourHandLength + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_HOUR_HAND_LENGTH}
+            maximumValue={demoConfigParameters.MAX_HOUR_HAND_LENGTH}
+            value={hourHandLength}
+            onValueChange={(value) => this.setState({hourHandLength: value })}
+          />
           {/* hourHandOffsideLength */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              hourHandOffsideLength ({(hourHandOffsideLength + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_HOUR_HAND_OFFSIDE_LENGTH}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_HOUR_HAND_OFFSIDE_LENGTH}
-              maximumValue={demoConfigParameters.MAX_HOUR_HAND_OFFSIDE_LENGTH}
-              onValueChange={(value) => this.setState({hourHandOffsideLength: value })}
-              value={this.state.hourHandOffsideLength}
-            />
-            <Text>
-              {demoConfigParameters.MAX_HOUR_HAND_OFFSIDE_LENGTH}
-            </Text>
-          </View>
-
+          <SliderCommand
+            title={`hourHandOffsideLength (${(hourHandOffsideLength + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_HOUR_HAND_OFFSIDE_LENGTH}
+            maximumValue={demoConfigParameters.MAX_HOUR_HAND_OFFSIDE_LENGTH}
+            value={hourHandOffsideLength}
+            onValueChange={(value) => this.setState({hourHandOffsideLength: value })}
+          />
           {/* MINUTES HAND CUSTOMIZATION */}
-          {/* title */}
-          <View style={styles.groupCommandTitle}>
-            <Text style={styles.groupCommandText}>
-              minutes HAND CUSTOMIZATION
-            </Text>
-          </View>
+          <GroupTitle
+            title={'MINUTES HAND CUSTOMIZATION'}
+          />
           {/* minuteHandColor */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              minuteHandColor
-            </Text>
-            <TextInput
-              style={[styles.cmdInput, styles.textInput]}
-              onChangeText={(text) => this.setState({minuteHandColor: text})}
-              value={this.state.minuteHandColor}
-            />
-          </View>
+          <ColorCommand
+            title={'minuteHandColor'}
+            value={minuteHandColor}
+            onChange={(value) => this.setState({minuteHandColor: value})}
+          />
           {/* minuteHandAlpha */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              minuteHandAlpha ({(minuteHandAlpha + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_MINUTE_HAND_ALPHA}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_MINUTE_HAND_ALPHA}
-              maximumValue={demoConfigParameters.MAX_MINUTE_HAND_ALPHA}
-              onValueChange={(value) => this.setState({minuteHandAlpha: value })}
-              value={this.state.minuteHandAlpha}
-            />
-            <Text>
-              {demoConfigParameters.MAX_MINUTE_HAND_ALPHA}
-            </Text>
-          </View>
+          <SliderCommand
+            title={`minuteHandAlpha (${(minuteHandAlpha + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_MINUTE_HAND_ALPHA}
+            maximumValue={demoConfigParameters.MAX_MINUTE_HAND_ALPHA}
+            value={minuteHandAlpha}
+            onValueChange={(value) => this.setState({minuteHandAlpha: value })}
+          />
           {/* minuteHandWidth */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              minuteHandWidth ({(minuteHandWidth + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_MINUTE_HAND_WIDTH}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_MINUTE_HAND_WIDTH}
-              maximumValue={demoConfigParameters.MAX_MINUTE_HAND_WIDTH}
-              onValueChange={(value) => this.setState({minuteHandWidth: value })}
-              value={this.state.minuteHandWidth}
-            />
-            <Text>
-              {demoConfigParameters.MAX_MINUTE_HAND_WIDTH}
-            </Text>
-          </View>
+          <SliderCommand
+            title={`minuteHandWidth (${(minuteHandWidth + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_MINUTE_HAND_WIDTH}
+            maximumValue={demoConfigParameters.MAX_MINUTE_HAND_WIDTH}
+            value={minuteHandWidth}
+            onValueChange={(value) => this.setState({minuteHandWidth: value })}
+          />
           {/* minuteHandLength */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              minuteHandLength ({(minuteHandLength + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_MINUTE_HAND_LENGTH}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_MINUTE_HAND_LENGTH}
-              maximumValue={demoConfigParameters.MAX_MINUTE_HAND_LENGTH}
-              onValueChange={(value) => this.setState({minuteHandLength: value })}
-              value={this.state.minuteHandLength}
-            />
-            <Text>
-              {demoConfigParameters.MAX_MINUTE_HAND_LENGTH}
-            </Text>
-          </View>
+          <SliderCommand
+            title={`minuteHandLength (${(minuteHandLength + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_MINUTE_HAND_LENGTH}
+            maximumValue={demoConfigParameters.MAX_MINUTE_HAND_LENGTH}
+            value={minuteHandLength}
+            onValueChange={(value) => this.setState({minuteHandLength: value })}
+          />
           {/* minuteHandOffsideLength */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              minuteHandOffsideLength ({(minuteHandOffsideLength + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_MINUTE_HAND_OFFSIDE_LENGTH}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_MINUTE_HAND_OFFSIDE_LENGTH}
-              maximumValue={demoConfigParameters.MAX_MINUTE_HAND_OFFSIDE_LENGTH}
-              onValueChange={(value) => this.setState({minuteHandOffsideLength: value })}
-              value={this.state.minuteHandOffsideLength}
-            />
-            <Text>
-              {demoConfigParameters.MAX_MINUTE_HAND_OFFSIDE_LENGTH}
-            </Text>
-          </View>
-
+          <SliderCommand
+            title={`minuteHandOffsideLength (${(minuteHandOffsideLength + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_MINUTE_HAND_OFFSIDE_LENGTH}
+            maximumValue={demoConfigParameters.MAX_MINUTE_HAND_OFFSIDE_LENGTH}
+            value={minuteHandOffsideLength}
+            onValueChange={(value) => this.setState({minuteHandOffsideLength: value })}
+          />
           {/* SECONDS HAND CUSTOMIZATION */}
-          {/* title */}
-          <View style={styles.groupCommandTitle}>
-            <Text style={styles.groupCommandText}>
-              SECONDS HAND CUSTOMIZATION
-            </Text>
-          </View>
+          <GroupTitle
+            title={'SECONDS HAND CUSTOMIZATION'}
+          />
           {/* hourHandColor */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              secondHandColor
-            </Text>
-            <TextInput
-              style={[styles.cmdInput, styles.textInput]}
-              onChangeText={(text) => this.setState({secondHandColor: text})}
-              value={this.state.secondHandColor}
-            />
-          </View>
+          <ColorCommand
+            title={'secondHandColor'}
+            value={secondHandColor}
+            onChange={(value) => this.setState({secondHandColor: value})}
+          />
           {/* secondHandAlpha */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              secondHandAlpha ({(secondHandAlpha + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_SECOND_HAND_ALPHA}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_SECOND_HAND_ALPHA}
-              maximumValue={demoConfigParameters.MAX_SECOND_HAND_ALPHA}
-              onValueChange={(value) => this.setState({secondHandAlpha: value })}
-              value={this.state.secondHandAlpha}
-            />
-            <Text>
-              {demoConfigParameters.MAX_SECOND_HAND_ALPHA}
-            </Text>
-          </View>
+          <SliderCommand
+            title={`secondHandAlpha (${(secondHandAlpha + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_SECOND_HAND_ALPHA}
+            maximumValue={demoConfigParameters.MAX_SECOND_HAND_ALPHA}
+            value={secondHandAlpha}
+            onValueChange={(value) => this.setState({secondHandAlpha: value })}
+          />
           {/* secondHandWidth */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              secondHandWidth ({(secondHandWidth + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_SECOND_HAND_WIDTH}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_SECOND_HAND_WIDTH}
-              maximumValue={demoConfigParameters.MAX_SECOND_HAND_WIDTH}
-              onValueChange={(value) => this.setState({secondHandWidth: value })}
-              value={this.state.secondHandWidth}
-            />
-            <Text>
-              {demoConfigParameters.MAX_SECOND_HAND_WIDTH}
-            </Text>
-          </View>
+          <SliderCommand
+            title={`secondHandWidth (${(secondHandWidth + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_SECOND_HAND_WIDTH}
+            maximumValue={demoConfigParameters.MAX_SECOND_HAND_WIDTH}
+            value={secondHandWidth}
+            onValueChange={(value) => this.setState({secondHandWidth: value })}
+          />
           {/* secondHandLength */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              secondHandLength ({(secondHandLength + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_SECOND_HAND_LENGTH}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_SECOND_HAND_LENGTH}
-              maximumValue={demoConfigParameters.MAX_SECOND_HAND_LENGTH}
-              onValueChange={(value) => this.setState({secondHandLength: value })}
-              value={this.state.secondHandLength}
-            />
-            <Text>
-              {demoConfigParameters.MAX_SECOND_HAND_LENGTH}
-            </Text>
-          </View>
+          <SliderCommand
+            title={`secondHandLength (${(secondHandLength + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_SECOND_HAND_LENGTH}
+            maximumValue={demoConfigParameters.MAX_SECOND_HAND_LENGTH}
+            value={secondHandLength}
+            onValueChange={(value) => this.setState({secondHandLength: value })}
+          />
           {/* secondHandOffsideLength */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              secondHandOffsideLength ({(secondHandOffsideLength + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_SECOND_HAND_OFFSIDE_LENGTH}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_SECOND_HAND_OFFSIDE_LENGTH}
-              maximumValue={demoConfigParameters.MAX_SECOND_HAND_OFFSIDE_LENGTH}
-              onValueChange={(value) => this.setState({secondHandOffsideLength: value })}
-              value={this.state.secondHandOffsideLength}
-            />
-            <Text>
-              {demoConfigParameters.MAX_SECOND_HAND_OFFSIDE_LENGTH}
-            </Text>
-          </View>
-
+          <SliderCommand
+            title={`secondHandOffsideLength (${(secondHandOffsideLength + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_SECOND_HAND_OFFSIDE_LENGTH}
+            maximumValue={demoConfigParameters.MAX_SECOND_HAND_OFFSIDE_LENGTH}
+            value={secondHandOffsideLength}
+            onValueChange={(value) => this.setState({secondHandOffsideLength: value })}
+          />
           {/* HUB CUSTOMIZATION */}
-          {/* title */}
-          <View style={styles.groupCommandTitle}>
-            <Text style={styles.groupCommandText}>
-              HUB CUSTOMIZATION
-            </Text>
-          </View>
+          <GroupTitle
+            title={'HUB CUSTOMIZATION'}
+          />
           {/* hubColor */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              hubColor
-            </Text>
-            <TextInput
-              style={[styles.cmdInput, styles.textInput]}
-              onChangeText={(text) => this.setState({hubColor: text})}
-              value={this.state.hubColor}
-            />
-          </View>
+          <ColorCommand
+            title={'hubColor'}
+            value={hubColor}
+            onChange={(value) => this.setState({hubColor: value})}
+          />
           {/* hubAlpha */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              hubAlpha ({(hubAlpha + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_HUB_ALPHA}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_HUB_ALPHA}
-              maximumValue={demoConfigParameters.MAX_HUB_ALPHA}
-              onValueChange={(value) => this.setState({hubAlpha: value })}
-              value={this.state.hubAlpha}
-            />
-            <Text>
-              {demoConfigParameters.MAX_HUB_ALPHA}
-            </Text>
-          </View>
+          <SliderCommand
+            title={`hubAlpha (${(hubAlpha + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_HUB_ALPHA}
+            maximumValue={demoConfigParameters.MAX_HUB_ALPHA}
+            value={hubAlpha}
+            onValueChange={(value) => this.setState({hubAlpha: value })}
+          />
           {/* hubRadius */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              hubRadius ({(hubRadius + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_HUB_RADIUS}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={demoConfigParameters.MIN_HUB_RADIUS}
-              maximumValue={demoConfigParameters.MAX_HUB_RADIUS}
-              onValueChange={(value) => this.setState({hubRadius: value })}
-              value={this.state.hubRadius}
-            />
-            <Text>
-              {demoConfigParameters.MAX_HUB_RADIUS}
-            </Text>
-          </View>
-
+          <SliderCommand
+            title={`hubRadius (${(hubRadius + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_HUB_RADIUS}
+            maximumValue={demoConfigParameters.MAX_HUB_RADIUS}
+            value={hubRadius}
+            onValueChange={(value) => this.setState({hubRadius: value })}
+          />
           {/* GRADUATIONS CUSTOMIZATION */}
-          {/* title */}
-          <View style={styles.groupCommandTitle}>
-            <Text style={styles.groupCommandText}>
-              GRADUATIONS CUSTOMIZATION
-            </Text>
-          </View>
+          <GroupTitle
+            title={'GRADUATIONS CUSTOMIZATION'}
+          />
           {/* accentGraduationModulo */}
-          <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              accentGraduationModulo ({(accentGraduationModulo + '')})
-            </Text>
-            <Text>
-              {demoConfigParameters.MIN_GRADUATION_ACCENT_MODULO}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              step={1}
-              minimumValue={demoConfigParameters.MIN_GRADUATION_ACCENT_MODULO}
-              maximumValue={demoConfigParameters.MAX_GRADUATION_ACCENT_MODULO}
-              onValueChange={(value) => this.setState({accentGraduationModulo: value })}
-              value={this.state.hubAlpha}
-            />
-            <Text>
-              {demoConfigParameters.MAX_GRADUATION_ACCENT_MODULO}
-            </Text>
-          </View>
+          <SliderCommand
+            title={`accentGraduationModulo (${(accentGraduationModulo + '')})`}
+            minimumValue={demoConfigParameters.MIN_GRADUATION_ACCENT_MODULO}
+            maximumValue={demoConfigParameters.MAX_GRADUATION_ACCENT_MODULO}
+            value={accentGraduationModulo}
+            onValueChange={(value) => this.setState({accentGraduationModulo: value })}
+          />
           {/* hubColor */}
           {/* <View style={styles.command}>
             <Text style={styles.cmdInfo}>
