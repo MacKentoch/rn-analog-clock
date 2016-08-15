@@ -1,3 +1,5 @@
+'use strict';
+
 import React , {
   Component,
   PropTypes
@@ -5,8 +7,7 @@ import React , {
 import {
   requireNativeComponent,
   NativeModules,
-  processColor,
-  View
+  processColor
 }                           from 'react-native';
 
 const RNAnalogClock = requireNativeComponent(
@@ -80,9 +81,9 @@ class AnalogClock extends Component {
     <RNAnalogClock
       onClockTick={this.handlesOnClockTick}
       PROPERTIES
-      bridgeHours={parseInt(hours, 10) ? parseInt(hours, 10)%12 : getDefaultProps().hours}
-      bridgeMinutes={parseInt(minutes, 10) ? parseInt(minutes, 10)%60 : getDefaultProps().minutes}
-      bridgeSeconds={parseInt(seconds, 10) ? parseInt(seconds, 10)%60 : getDefaultProps().seconds}
+      bridgeHours={parseInt(hours, 10) ? parseInt(hours, 10) % 12 : getDefaultProps().hours}
+      bridgeMinutes={parseInt(minutes, 10) ? parseInt(minutes, 10) % 60 : getDefaultProps().minutes}
+      bridgeSeconds={parseInt(seconds, 10) ? parseInt(seconds, 10) % 60 : getDefaultProps().seconds}
       bridgeSetTimeViaTouch={setTimeViaTouch}
       bridgeEnableShadows={enableShadows}
       bridgeRealTime={realTime}
@@ -282,7 +283,7 @@ function getDefaultProps() {
     seconds: 0,
     // CLOCK'S FACE CUSTOMIZATION
     digitOffset: 8
-  }
+  };
 }
 
 export default AnalogClock;

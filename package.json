@@ -21,6 +21,10 @@
     "timepicker"
   ],
   "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "eslint": "^3.3.0",
+    "eslint-plugin-react": "^6.1.0",
+    "eslint-plugin-react-native": "^2.0.0",
     "react-native": "^0.31.0"
   }
 }
