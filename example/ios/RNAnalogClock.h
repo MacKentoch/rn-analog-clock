@@ -10,14 +10,6 @@
 #import "RCTComponent.h"
 #import "BEMAnalogClockView.h"
 
-
-extern BOOL const DEFAULT_IS_ANIMATED;
-
-extern CGFloat const smallGraduationLength; //= 5.0
-extern CGFloat const highGraduationLength;  //: CGFloat! = 10.0
-extern CGFloat const smallGraduationWidth;  //: CGFloat! = 1.0
-extern CGFloat const highGraduationWidth;   //: CGFloat! = 2.0
-
 @interface RNAnalogClock: BEMAnalogClockView
 
 ///////////////////////////////////
@@ -121,19 +113,38 @@ extern CGFloat const highGraduationWidth;   //: CGFloat! = 2.0
 /// The width of the clock's hub. Default value is 3.0.
 @property (nonatomic, assign) CGFloat bridgeHubRadius;
 
-
+/////////////////////////////////////////
+//----- GRADUATIONS CUSTOMIZATION -----//
+/////////////////////////////////////////
+/// The index modulo to accent graduations (= 5 by default)
+@property (nonatomic, assign) NSInteger accentGraduationModulo;
+/// The color of the accented graduations (every accentGraduationModulo graduations)
+@property (nonatomic, assign) UIColor * highGraduationColor; // property
+@property (nonatomic, assign) NSNumber* bridgeHighGraduationColor; // bridged property since UIColor does not exists in JS world
+/// The color of the non accented graduations (every accentGraduationModulo graduations)
+@property (nonatomic, assign) UIColor * smallGraduationColor; // property
+@property (nonatomic, assign) NSNumber* bridgeSmallGraduationColor; // bridged property since UIColor does not exists in JS world
+/// The width of the accented graduations (every accentGraduationModulo graduations)
+@property (nonatomic, assign) CGFloat bridgeHighGraduationWidth;
+/// The width of the non accented graduations (every accentGraduationModulo graduations)
+@property (nonatomic, assign) CGFloat bridgeSmallGraduationWidth;
+/// The length of the accented graduations (every accentGraduationModulo graduations)
+@property (nonatomic, assign) CGFloat bridgeHighGraduationLength;
+/// The length of the non accented graduations (every accentGraduationModulo graduations)
+@property (nonatomic, assign) CGFloat bridgeSmallGraduationLength;
 
 
 //////////////////////////////
 //----- Initialization -----//
 //////////////////////////////
 -(void) initWithDefaultConfig: (BOOL) animated
-        smallGraduationLength:(CGFloat)smallGraduationLength
-         highGraduationLength:(CGFloat)highGraduationLength
-         smallGraduationWidth:(CGFloat)smallGraduationWidth
-          highGraduationWidth:(CGFloat) highGraduationWidth
-         smallGraduationColor:(UIColor *) smallGraduationColor
-          highGraduationColor:(UIColor*) highGraduationColor;
+       accentGraduationModulo: (NSInteger) accentGraduationModulo
+        smallGraduationLength: (CGFloat) smallGraduationLength
+         highGraduationLength: (CGFloat) highGraduationLength
+         smallGraduationWidth: (CGFloat) smallGraduationWidth
+          highGraduationWidth: (CGFloat) highGraduationWidth
+         smallGraduationColor: (UIColor *) smallGraduationColor
+          highGraduationColor: (UIColor *) highGraduationColor;
 
 ///////////////////////////////////
 //----- reload clock action -----//

@@ -189,6 +189,25 @@ RCT_EXPORT_VIEW_PROPERTY(bridgeHubAlpha, CGFloat);
 /// The width of the clock's hub. Default value is 3.0.
 RCT_EXPORT_VIEW_PROPERTY(bridgeHubRadius, CGFloat);
 
+/////////////////////////////////////////
+//----- GRADUATIONS CUSTOMIZATION -----//
+/////////////////////////////////////////
+/// The index modulo to accent graduations (= 5 by default)
+RCT_EXPORT_VIEW_PROPERTY(accentGraduationModulo, NSInteger);
+/// The color of the accented graduations (every accentGraduationModulo graduations)
+RCT_EXPORT_VIEW_PROPERTY(bridgeHighGraduationColor, NSNumber);
+/// The color of the non accented graduations (every accentGraduationModulo graduations)
+RCT_EXPORT_VIEW_PROPERTY(bridgeSmallGraduationColor, NSNumber);
+/// The width of the accented graduations (every accentGraduationModulo graduations)
+RCT_EXPORT_VIEW_PROPERTY(bridgeHighGraduationWidth, CGFloat);
+/// The width of the non accented graduations (every accentGraduationModulo graduations)
+RCT_EXPORT_VIEW_PROPERTY(bridgeSmallGraduationWidth, CGFloat);
+/// The length of the accented graduations (every accentGraduationModulo graduations)
+RCT_EXPORT_VIEW_PROPERTY(bridgeHighGraduationLength, CGFloat);
+/// The length of the non accented graduations (every accentGraduationModulo graduations)
+RCT_EXPORT_VIEW_PROPERTY(bridgeSmallGraduationLength, CGFloat);
+
+
 #pragma mark - methods export
 ///////////////////////////////
 //----- JS side actions -----//
