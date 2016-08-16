@@ -32,11 +32,11 @@ npm i --save react-native-analog-clock
 react-native link
 ```
 
-### import AnalogClock
+### import AnalogClock component
+
+**A  minimalist (a bit ugly) example:**
 ```javascript
 import AnalogClock from 'react-native-analog-clock';
-// minimalist use (a bit ugly):
-
 // in your render()
 render() {
   return (
@@ -52,6 +52,97 @@ render() {
   );
 }
 ```
+
+**A super power example:**
+
+```javascript
+import AnalogClock from 'react-native-analog-clock';
+// in your render()
+render() {
+  //NOTE: state should be initialized in your constructor (I just abbreviate)
+  const { demoConfigParameters } = this.state;
+  const { hours, minutes, seconds } = this.state;
+  const { currentHours, currentMinutes, currentSeconds } = this.state;
+  const { enableShadows, realTime, militaryTime, currentTime, enableDigit, setTimeViaTouch, enableGraduations, enableHub } = this.state;
+  const { borderColor, borderWidth, borderAlpha } = this.state;
+  const { digitOffset, digitColor } = this.state;
+  const { faceBackgroundColor, faceBackgroundAlpha } = this.state;
+  const { hourHandColor, hourHandAlpha, hourHandWidth, hourHandLength, hourHandOffsideLength } = this.state;
+  const { minuteHandColor, minuteHandAlpha, minuteHandWidth, minuteHandLength, minuteHandOffsideLength } = this.state;
+  const { secondHandColor, secondHandAlpha, secondHandWidth, secondHandLength, secondHandOffsideLength } = this.state;
+  const { hubColor, hubAlpha, hubRadius } = this.state;
+  const { accentGraduationModulo, bridgeHighGraduationColor, bridgeSmallGraduationColor, highGraduationWidth, smallGraduationWidth, highGraduationLength, smallGraduationLength } = this.state;
+  return (
+    <AnalogClock
+      ref={(ref)=>{this.analogClock = ref;}}
+      style={styles.clock}
+      width={160}
+      height={160}
+      // PROPERTIES
+      hours={hours}
+      minutes={minutes}
+      seconds={seconds}
+      enableShadows={enableShadows}
+      realTime={realTime}
+      militaryTime={militaryTime}
+      currentTime={currentTime}
+      enableDigit={enableDigit}
+      setTimeViaTouch={setTimeViaTouch}
+      enableGraduations={enableGraduations}
+      enableHub={enableHub}
+      // CLOCK'S FACE CUSTOMIZATION
+      borderColor={borderColor}
+      borderAlpha={borderAlpha}
+      borderWidth={borderWidth}
+      digitColor={digitColor}
+      digitOffset={digitOffset}
+      faceBackgroundColor={faceBackgroundColor}
+      faceBackgroundAlpha={faceBackgroundAlpha}
+      // HOURS HAND CUSTOMIZATION
+      hourHandColor={hourHandColor}
+      hourHandAlpha={hourHandAlpha}
+      hourHandWidth={hourHandWidth}
+      hourHandLength={hourHandLength}
+      hourHandOffsideLength={hourHandOffsideLength}
+      // MINUTES HAND CUSTOMIZATION
+      minuteHandColor={minuteHandColor}
+      minuteHandAlpha={minuteHandAlpha}
+      minuteHandWidth={minuteHandWidth}
+      minuteHandLength={minuteHandLength}
+      minuteHandOffsideLength={minuteHandOffsideLength}
+      // SECONDS HAND CUSTOMIZATION
+      secondHandColor={secondHandColor}
+      secondHandAlpha={secondHandAlpha}
+      secondHandWidth={secondHandWidth}
+      secondHandLength={secondHandLength}
+      secondHandOffsideLength={secondHandOffsideLength}
+      // HUB CUSTOMIZATION
+      hubColor={hubColor}
+      hubAlpha={hubAlpha}
+      hubRadius={hubRadius}
+      // GRADUATIONS CUSTOMIZATION
+      accentGraduationModulo={accentGraduationModulo}
+      bridgeHighGraduationColor={bridgeHighGraduationColor}
+      bridgeSmallGraduationColor={bridgeSmallGraduationColor}
+      highGraduationWidth={highGraduationWidth}
+      smallGraduationWidth={smallGraduationWidth}
+      highGraduationLength={highGraduationLength}
+      smallGraduationLength={smallGraduationLength}
+      // CURRENT TIME CALLBACK
+      onTimeChange={
+        ({hours, minutes, seconds}) => {
+          this.setState({
+            currentHours: hours,
+            currentMinutes: minutes,
+            currentSeconds: seconds
+          });
+        }
+      }
+    />
+  );
+}
+```
+
 *[follow this complete example for more details](https://github.com/MacKentoch/rn-analog-clock/blob/master/example/index.ios.js)*
 
 
