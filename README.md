@@ -149,10 +149,9 @@ render() {
 ## Next?
 ### to add
 - [ ] add => JS side defaultProps
-- [x] add => `hub` customization props bridge
 - [ ] add => `digit font` prop bridge
-- [ ] add => `graduations length` prop bridge
-- [ ] add => `graduations width` prop bridge
+- [x] add => `graduations length` prop bridge
+- [x] add => `graduations width` prop bridge
 - [ ] add => `graduations color` prop bridge
 
 ### to fix

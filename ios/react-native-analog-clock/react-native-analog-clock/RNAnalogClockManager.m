@@ -13,6 +13,7 @@
 #import "RCTUIManager.h"
 #import "RCTViewManager.h"
 #import "UIView+React.h"
+#import "RCTConvert.h"
 
 @interface RNAnalogClockManager() <BEMAnalogClockDelegate>
 
@@ -45,7 +46,7 @@ RCT_EXPORT_MODULE()
                              @"hours": hours,
                              @"minutes": minutes,
                              @"seconds": seconds
-                            });
+                             });
 }
 
 //----- CLOCK EVENTS -----//
@@ -64,20 +65,29 @@ RCT_EXPORT_MODULE()
 
 //----- GRADUATION CUSTOMIZATION -----//
 - (CGFloat)analogClock:(BEMAnalogClockView *)clock graduationLengthForIndex:(NSInteger)index {
-  int modulo5 = (index + 1) % 5; // every 5 graduations
+  long modulo5 = (index + 1) % _AnalogClock.accentGraduationModulo;
   if (modulo5 == 1) {
-    return 10.0;
+    return _AnalogClock.highGraduationLength;
   } else {
-    return 5.0;
+    return _AnalogClock.smallGraduationLength;
   }
 }
 
 - (CGFloat)analogClock:(BEMAnalogClockView *)clock graduationWidthForIndex:(NSInteger)index {
-  int modulo5 = (index + 1) % 5; // every 5 graduations
+  long modulo5 = (index + 1) % _AnalogClock.accentGraduationModulo;
   if (modulo5 == 1) {
-    return 2.0;
+    return _AnalogClock.highGraduationWidth;
   } else {
-    return 1.0;
+    return _AnalogClock.smallGraduationWidth;
+  }
+}
+
+- (UIColor *)analogClock:(BEMAnalogClockView *)clock graduationColorForIndex:(NSInteger)index {
+  long modulo5 = (index + 1) % _AnalogClock.accentGraduationModulo;
+  if (modulo5 == 1) {
+    return [UIColor whiteColor];
+  } else {
+    return [UIColor whiteColor];
   }
 }
 
@@ -105,7 +115,7 @@ RCT_EXPORT_VIEW_PROPERTY(bridgeCurrentTime, BOOL);
 /// If set to YES, the clock will be updated in real time (the second hand will move every second, the minute hand every minute...). Default value is NO;
 RCT_EXPORT_VIEW_PROPERTY(bridgeRealTime, BOOL);
 
-  // If set to YES, the clock time will suport military time. Default value is NO.
+// If set to YES, the clock time will suport military time. Default value is NO.
 RCT_EXPORT_VIEW_PROPERTY(bridgeMilitaryTime, BOOL);
 /// If set to YES, the hands will cast a shadow. Default value is YES.
 RCT_EXPORT_VIEW_PROPERTY(bridgeEnableShadows, BOOL);
@@ -188,6 +198,24 @@ RCT_EXPORT_VIEW_PROPERTY(bridgeHubColor, NSNumber);
 RCT_EXPORT_VIEW_PROPERTY(bridgeHubAlpha, CGFloat);
 /// The width of the clock's hub. Default value is 3.0.
 RCT_EXPORT_VIEW_PROPERTY(bridgeHubRadius, CGFloat);
+
+/////////////////////////////////////////
+//----- GRADUATIONS CUSTOMIZATION -----//
+/////////////////////////////////////////
+/// The index modulo to accent graduations (= 5 by default)
+RCT_EXPORT_VIEW_PROPERTY(accentGraduationModulo, NSInteger);
+/// The color of the accented graduations (every accentGraduationModulo graduations)
+RCT_EXPORT_VIEW_PROPERTY(bridgeHighGraduationColor, NSNumber);
+/// The color of the non accented graduations (every accentGraduationModulo graduations)
+RCT_EXPORT_VIEW_PROPERTY(bridgeSmallGraduationColor, NSNumber);
+/// The width of the accented graduations (every accentGraduationModulo graduations)
+RCT_EXPORT_VIEW_PROPERTY(highGraduationWidth, CGFloat);
+/// The width of the non accented graduations (every accentGraduationModulo graduations)
+RCT_EXPORT_VIEW_PROPERTY(smallGraduationWidth, CGFloat);
+/// The length of the accented graduations (every accentGraduationModulo graduations)
+RCT_EXPORT_VIEW_PROPERTY(highGraduationLength, CGFloat);
+/// The length of the non accented graduations (every accentGraduationModulo graduations)
+RCT_EXPORT_VIEW_PROPERTY(smallGraduationLength, CGFloat);
 
 #pragma mark - methods export
 ///////////////////////////////

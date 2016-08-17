@@ -550,17 +550,17 @@ class AnalogClockDEMO extends Component {
             onValueChange={(value) => this.setState({accentGraduationModulo: value })}
           />
           {/* bridgeHighGraduationColor */}
-          <ColorCommand
+          {/* <ColorCommand
             title={'bridgeHighGraduationColor'}
             value={bridgeHighGraduationColor}
             onChange={(value) => this.setState({bridgeHighGraduationColor: value})}
-          />
+          /> */}
           {/* bridgeSmallGraduationColor */}
-          <ColorCommand
+          {/* <ColorCommand
             title={'bridgeSmallGraduationColor'}
             value={bridgeSmallGraduationColor}
             onChange={(value) => this.setState({bridgeSmallGraduationColor: value})}
-          />
+          /> */}
           {/* highGraduationLength */}
           <SliderCommand
             title={`highGraduationLength (${(highGraduationLength + '').slice(0, 4)})`}

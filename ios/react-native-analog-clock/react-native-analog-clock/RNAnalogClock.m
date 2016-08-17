@@ -9,11 +9,6 @@
 #import "RNAnalogClock.h"
 #import "RCTConvert.h"
 
-BOOL const DEFAULT_IS_ANIMATED = YES;
-CGFloat const DEFAULT_SMALL_GRADUATION_LENGTH = 5.0;
-CGFloat const DEFAULT_HIGH_GRADUATION_LENGTH = 10.0;
-CGFloat const DEFAULT_SMALL_GRADUATION_WIDTH = 1.0;
-CGFloat const DEFAULT_HIGH_GRADUATION_WIDTH = 2.0;
 
 @implementation RNAnalogClock {
   BOOL _animated;
@@ -28,21 +23,14 @@ CGFloat const DEFAULT_HIGH_GRADUATION_WIDTH = 2.0;
 {
   self = [super initWithFrame:frame];
   if (self) {
-    [self initWithDefaultConfig:DEFAULT_IS_ANIMATED
-          smallGraduationLength:DEFAULT_SMALL_GRADUATION_LENGTH
-           highGraduationLength:DEFAULT_HIGH_GRADUATION_LENGTH
-           smallGraduationWidth:DEFAULT_SMALL_GRADUATION_WIDTH
-            highGraduationWidth:DEFAULT_HIGH_GRADUATION_WIDTH
-           smallGraduationColor:[UIColor colorWithRed:(241.0/255.0)
-                                                green:241.0/255.0
-                                                 blue:241.0/255.0
-                                                alpha:1.0
-                                 ]
-            highGraduationColor:[UIColor colorWithRed:241.0/255.0
-                                                green:241.0/255.0
-                                                 blue:241.0/255.0
-                                                alpha:1.0
-                                 ]
+    [self initWithDefaultConfig: YES
+         accentGraduationModulo: 5
+          smallGraduationLength: 5.0
+           highGraduationLength: 10.0
+           smallGraduationWidth: 1.0
+            highGraduationWidth: 2.0
+           smallGraduationColor: [UIColor whiteColor]
+            highGraduationColor: [UIColor whiteColor]
      ];
   }
   return self;
@@ -50,14 +38,21 @@ CGFloat const DEFAULT_HIGH_GRADUATION_WIDTH = 2.0;
 
 
 -(void) initWithDefaultConfig: (BOOL) animated
-        smallGraduationLength:(CGFloat)smallGraduationLength
-         highGraduationLength:(CGFloat)highGraduationLength
-         smallGraduationWidth:(CGFloat)smallGraduationWidth
-          highGraduationWidth:(CGFloat) highGraduationWidth
-         smallGraduationColor:(UIColor *) smallGraduationColor
-          highGraduationColor:(UIColor*) highGraduationColor {
-  NSLog(@"initWithDefaultConfig called");
+       accentGraduationModulo: (NSInteger) accentGraduationModulo
+        smallGraduationLength: (CGFloat) smallGraduationLength
+         highGraduationLength: (CGFloat) highGraduationLength
+         smallGraduationWidth: (CGFloat) smallGraduationWidth
+          highGraduationWidth: (CGFloat) highGraduationWidth
+         smallGraduationColor: (UIColor *) smallGraduationColor
+          highGraduationColor: (UIColor *) highGraduationColor {
   _animated = animated;
+  _accentGraduationModulo = accentGraduationModulo;;
+  _highGraduationWidth = highGraduationWidth;
+  _smallGraduationWidth = smallGraduationWidth;
+  _highGraduationLength = highGraduationLength;
+  _smallGraduationLength = smallGraduationLength;
+  _highGraduationColor = [UIColor whiteColor];
+  _smallGraduationColor = [UIColor whiteColor];
 }
 
 #pragma mark - properties setters
@@ -243,6 +238,44 @@ CGFloat const DEFAULT_HIGH_GRADUATION_WIDTH = 2.0;
 
 -(void) setBridgeHubRadius: (CGFloat) radius {
   self.hubRadius = radius;
+  [self reloadClock];
+}
+
+#pragma mark - graduation customization setters
+-(void) setAccentGraduationModulo: (NSInteger) modulo {
+  _accentGraduationModulo = modulo;
+  [self reloadClock];
+}
+
+-(void) setBridgeHighGraduationColor: (NSNumber *) color {
+  //  _bridgeHighGraduationColor = color;
+  _highGraduationColor = [RCTConvert UIColor: color];
+  [self reloadClock];
+}
+
+-(void) setBridgeSmallGraduationColor: (NSNumber *) color {
+  //  _bridgeSmallGraduationColor = color;
+  _smallGraduationColor = [RCTConvert UIColor: color];
+  [self reloadClock];
+}
+
+-(void) setHighGraduationWidth: (CGFloat) width {
+  _highGraduationWidth = width;
+  [self reloadClock];
+}
+
+-(void) setSmallGraduationWidth: (CGFloat) width {
+  _smallGraduationWidth = width;
+  [self reloadClock];
+}
+
+-(void) setHighGraduationLength: (CGFloat) length {
+  _highGraduationLength = length;
+  [self reloadClock];
+}
+
+-(void) setSmallGraduationLength:(CGFloat) length {
+  _smallGraduationLength = length;
   [self reloadClock];
 }
 
