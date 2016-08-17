@@ -13,6 +13,7 @@
 #import "RCTUIManager.h"
 #import "RCTViewManager.h"
 #import "UIView+React.h"
+#import "RCTConvert.h"
 
 @interface RNAnalogClockManager() <BEMAnalogClockDelegate>
 
@@ -84,9 +85,9 @@ RCT_EXPORT_MODULE()
 - (UIColor *)analogClock:(BEMAnalogClockView *)clock graduationColorForIndex:(NSInteger)index {
   int modulo5 = (index + 1) % _AnalogClock.accentGraduationModulo;
   if (modulo5 == 1) {
-    return _AnalogClock.highGraduationColor;
+    return [UIColor whiteColor];
   } else {
-    return _AnalogClock.smallGraduationColor;
+    return [UIColor whiteColor];
   }
 }
 

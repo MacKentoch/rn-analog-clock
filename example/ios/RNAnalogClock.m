@@ -38,7 +38,7 @@
 
 
 -(void) initWithDefaultConfig: (BOOL) animated
-       accentGraduationModulo: (int) accentGraduationModulo
+       accentGraduationModulo: (NSInteger) accentGraduationModulo
         smallGraduationLength: (CGFloat) smallGraduationLength
          highGraduationLength: (CGFloat) highGraduationLength
          smallGraduationWidth: (CGFloat) smallGraduationWidth
@@ -46,13 +46,13 @@
          smallGraduationColor: (UIColor *) smallGraduationColor
           highGraduationColor: (UIColor *) highGraduationColor {
   _animated = animated;
-  _accentGraduationModulo = accentGraduationModulo;
-  _highGraduationColor = highGraduationColor;
-  _smallGraduationColor = smallGraduationColor;
+  _accentGraduationModulo = accentGraduationModulo;;
   _highGraduationWidth = highGraduationWidth;
   _smallGraduationWidth = smallGraduationWidth;
   _highGraduationLength = highGraduationLength;
   _smallGraduationLength = smallGraduationLength;
+  _highGraduationColor = [UIColor whiteColor];
+  _smallGraduationColor = [UIColor whiteColor];
 }
 
 #pragma mark - properties setters
@@ -242,38 +242,40 @@
 }
 
 #pragma mark - graduation customization setters
--(void) setAccentGraduationModulo:(int)modulo {
-  self.accentGraduationModulo = modulo;
+-(void) setAccentGraduationModulo: (NSInteger) modulo {
+  _accentGraduationModulo = modulo;
   [self reloadClock];
 }
 
--(void) setBridgeHighGraduationColor:(NSNumber *)color {
-  self.highGraduationColor = [RCTConvert UIColor: color];
+-(void) setBridgeHighGraduationColor: (NSNumber *) color {
+//  _bridgeHighGraduationColor = color;
+  _highGraduationColor = [RCTConvert UIColor: color];
   [self reloadClock];
 }
 
--(void) setBridgeSmallGraduationColor:(NSNumber *)color {
-  self.smallGraduationColor = [RCTConvert UIColor: color];
+-(void) setBridgeSmallGraduationColor: (NSNumber *) color {
+//  _bridgeSmallGraduationColor = color;
+  _smallGraduationColor = [RCTConvert UIColor: color];
   [self reloadClock];
 }
 
--(void) setBridgeHighGraduationWidth:(CGFloat)width {
-  self.highGraduationWidth = width;
+-(void) setHighGraduationWidth: (CGFloat) width {
+  _highGraduationWidth = width;
   [self reloadClock];
 }
 
--(void) setBridgeSmallGraduationWidth:(CGFloat)width {
-  self.smallGraduationWidth = width;
+-(void) setSmallGraduationWidth: (CGFloat) width {
+  _smallGraduationWidth = width;
   [self reloadClock];
 }
 
--(void) setBridgeHighGraduationLength:(CGFloat)length {
-  self.highGraduationLength = length;
+-(void) setHighGraduationLength: (CGFloat) length {
+  _highGraduationLength = length;
   [self reloadClock];
 }
 
--(void) setBridgeSmallGraduationLength:(CGFloat)length {
-  self.smallGraduationLength = length;
+-(void) setSmallGraduationLength:(CGFloat) length {
+  _smallGraduationLength = length;
   [self reloadClock];
 }
 

@@ -117,12 +117,12 @@
 //----- GRADUATIONS CUSTOMIZATION -----//
 /////////////////////////////////////////
 /// The index modulo to accent graduations (= 5 by default)
-@property (nonatomic, assign) int accentGraduationModulo;
+@property (nonatomic, assign) NSInteger accentGraduationModulo;
 /// The color of the accented graduations (every accentGraduationModulo graduations)
-@property (nonatomic, assign) UIColor * highGraduationColor; // property
+@property (nonatomic, assign) UIColor* highGraduationColor; // property
 @property (nonatomic, assign) NSNumber* bridgeHighGraduationColor; // bridged property since UIColor does not exists in JS world
 /// The color of the non accented graduations (every accentGraduationModulo graduations)
-@property (nonatomic, assign) UIColor * smallGraduationColor; // property
+@property (nonatomic, assign) UIColor* smallGraduationColor; // property
 @property (nonatomic, assign) NSNumber* bridgeSmallGraduationColor; // bridged property since UIColor does not exists in JS world
 /// The width of the accented graduations (every accentGraduationModulo graduations)
 @property (nonatomic, assign) CGFloat highGraduationWidth;

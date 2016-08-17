@@ -549,39 +549,50 @@ class AnalogClockDEMO extends Component {
             value={accentGraduationModulo}
             onValueChange={(value) => this.setState({accentGraduationModulo: value })}
           />
-          {/* hubColor */}
-          {/* <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              hubColor
-            </Text>
-            <TextInput
-              style={[styles.cmdInput, styles.textInput]}
-              onChangeText={(text) => this.setState({hubColor: text})}
-              value={this.state.hubColor}
-            />
-          </View> */}
-
-          {/* hubAlpha */}
-          {/* <View style={styles.command}>
-            <Text style={styles.cmdInfo}>
-              hubAlpha ({(hubAlpha + '').slice(0, 4)})
-            </Text>
-            <Text>
-              {MIN_HUB_ALPHA}
-            </Text>
-            <Slider
-              style={styles.sliders}
-              minimumValue={MIN_HUB_ALPHA}
-              maximumValue={MAX_HUB_ALPHA}
-              onValueChange={(value) => this.setState({hubAlpha: value })}
-              value={this.state.hubAlpha}
-            />
-            <Text>
-              {MAX_HUB_ALPHA}
-            </Text>
-          </View> */}
-
-
+          {/* bridgeHighGraduationColor */}
+          <ColorCommand
+            title={'bridgeHighGraduationColor'}
+            value={bridgeHighGraduationColor}
+            onChange={(value) => this.setState({bridgeHighGraduationColor: value})}
+          />
+          {/* bridgeSmallGraduationColor */}
+          <ColorCommand
+            title={'bridgeSmallGraduationColor'}
+            value={bridgeSmallGraduationColor}
+            onChange={(value) => this.setState({bridgeSmallGraduationColor: value})}
+          />
+          {/* highGraduationLength */}
+          <SliderCommand
+            title={`highGraduationLength (${(highGraduationLength + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_HIGH_GRADUATION_LENGTH}
+            maximumValue={demoConfigParameters.MAX_HIGH_GRADUATION_LENGTH}
+            value={highGraduationLength}
+            onValueChange={(value) => this.setState({highGraduationLength: value })}
+          />
+          {/* smallGraduationLength */}
+          <SliderCommand
+            title={`smallGraduationLength (${(smallGraduationLength + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_SMALL_GRADUATION_LENGTH}
+            maximumValue={demoConfigParameters.MAX_SMALL_GRADUATION_LENGTH}
+            value={smallGraduationLength}
+            onValueChange={(value) => this.setState({smallGraduationLength: value })}
+          />
+          {/* highGraduationWidth */}
+          <SliderCommand
+            title={`highGraduationWidth (${(highGraduationWidth + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_HIGH_GRADUATION_WIDTH}
+            maximumValue={demoConfigParameters.MAX_HIGH_GRADUATION_WIDTH}
+            value={highGraduationWidth}
+            onValueChange={(value) => this.setState({highGraduationWidth: value })}
+          />
+          {/* smallGraduationWidth */}
+          <SliderCommand
+            title={`smallGraduationWidth (${(smallGraduationWidth + '').slice(0, 4)})`}
+            minimumValue={demoConfigParameters.MIN_SMALL_GRADUATION_WIDTH}
+            maximumValue={demoConfigParameters.MAX_SMALL_GRADUATION_WIDTH}
+            value={smallGraduationWidth}
+            onValueChange={(value) => this.setState({smallGraduationWidth: value })}
+          />
         </ScrollView>
       </View>
     );
@@ -645,7 +656,15 @@ function demoConfigParameters() {
     MIN_HUB_RADIUS: 0.0,
     MAX_HUB_RADIUS: 20.0,
     MIN_GRADUATION_ACCENT_MODULO: 0,
-    MAX_GRADUATION_ACCENT_MODULO: 0
+    MAX_GRADUATION_ACCENT_MODULO: 0,
+    MIN_HIGH_GRADUATION_LENGTH: 0,
+    MAX_HIGH_GRADUATION_LENGTH: 20.0,
+    MIN_SMALL_GRADUATION_LENGTH: 0,
+    MAX_SMALL_GRADUATION_LENGTH: 20.0,
+    MIN_HIGH_GRADUATION_WIDTH: 0,
+    MAX_HIGH_GRADUATION_WIDTH: 20.0,
+    MIN_SMALL_GRADUATION_WIDTH: 0,
+    MAX_SMALL_GRADUATION_WIDTH: 20.0,
   };
 }
 

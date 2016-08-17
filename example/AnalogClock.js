@@ -84,7 +84,6 @@ class AnalogClock extends Component {
       ...otherProps
     } = this.props;
 
-
     return (
     <RNAnalogClock
       onClockTick={this.handlesOnClockTick}
@@ -131,13 +130,13 @@ class AnalogClock extends Component {
       bridgeHubAlpha={parseFloat(hubAlpha) ? parseFloat(hubAlpha) : 1.0}
       bridgeHubRadius={parseFloat(hubRadius) ? parseFloat(hubRadius) : 3.0}
       // GRADUATIONS CUSTOMIZATION
-      // accentGraduationModulo={parseInt(accentGraduationModulo, 10) ? parseInt(accentGraduationModulo, 10) : 5}
-      // bridgeHighGraduationColor={processColor(bridgeHighGraduationColor)}
-      // bridgeSmallGraduationColor={processColor(bridgeSmallGraduationColor)}
-      // highGraduationWidth={parseFloat(highGraduationWidth) ? parseFloat(highGraduationWidth) : 2.0}
-      // smallGraduationWidth={parseFloat(smallGraduationWidth) ? parseFloat(smallGraduationWidth) : 1.0}
-      // highGraduationLength={parseFloat(highGraduationLength) ? parseFloat(highGraduationLength) : 10.0}
-      // smallGraduationLength={parseFloat(smallGraduationLength) ? parseFloat(smallGraduationLength) : 5.0}
+      accentGraduationModulo={parseInt(accentGraduationModulo, 10) ? parseInt(accentGraduationModulo, 10) : 5}
+      bridgeHighGraduationColor={processColor(bridgeHighGraduationColor)}
+      bridgeSmallGraduationColor={processColor(bridgeSmallGraduationColor)}
+      highGraduationWidth={parseFloat(highGraduationWidth) ? parseFloat(highGraduationWidth) : 2.0}
+      smallGraduationWidth={parseFloat(smallGraduationWidth) ? parseFloat(smallGraduationWidth) : 1.0}
+      highGraduationLength={parseFloat(highGraduationLength) ? parseFloat(highGraduationLength) : 10.0}
+      smallGraduationLength={parseFloat(smallGraduationLength) ? parseFloat(smallGraduationLength) : 5.0}
       {...otherProps}
     />
     );
@@ -306,7 +305,9 @@ AnalogClock.defaultProps = {
   minutes: getDefaultProps().minutes,
   seconds: getDefaultProps().seconds,
   // CLOCK'S FACE CUSTOMIZATION
-  digitOffset: getDefaultProps().digitOffset
+  digitOffset: getDefaultProps().digitOffset,
+  // GRADUATIONS CUSTOMIZATION
+  accentGraduationModulo: getDefaultProps().accentGraduationModulo
 };
 
 function getDefaultProps() {
@@ -316,7 +317,9 @@ function getDefaultProps() {
     minutes: 0,
     seconds: 0,
     // CLOCK'S FACE CUSTOMIZATION
-    digitOffset: 8
+    digitOffset: 8,
+    // GRADUATIONS CUSTOMIZATION
+    accentGraduationModulo: 5
   };
 }
 
