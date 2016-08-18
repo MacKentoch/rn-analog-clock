@@ -53,13 +53,13 @@ RCT_EXPORT_MODULE()
 /** Sent to the delegate each time the clock is loaded or reloaded.
  @param clock The clock object that is about to be loaded or reloaded. */
 - (void)clockDidBeginLoading:(BEMAnalogClockView *)clock {
-  NSLog(@"clockDidBeginLoading event");
+  // NSLog(@"clockDidBeginLoading event");
 }
 
 /** Sent to the delegate each time the clock finishes loading or reloading. Note that the animation is not finished at this point in time.
  @param clock The clock object that finished loading or reloading. */
 - (void)clockDidFinishLoading:(BEMAnalogClockView *)clock {
-  NSLog(@"clockDidFinishLoading event");
+  // NSLog(@"clockDidFinishLoading event");
 }
 
 
@@ -83,12 +83,7 @@ RCT_EXPORT_MODULE()
 }
 
 - (UIColor *)analogClock:(BEMAnalogClockView *)clock graduationColorForIndex:(NSInteger)index {
-  int modulo5 = (index + 1) % _AnalogClock.accentGraduationModulo;
-  if (modulo5 == 1) {
-    return [UIColor whiteColor];
-  } else {
-    return [UIColor whiteColor];
-  }
+  return _AnalogClock.digitColor; // graduation color is digit color
 }
 
 #pragma mark - properties export
@@ -205,9 +200,9 @@ RCT_EXPORT_VIEW_PROPERTY(bridgeHubRadius, CGFloat);
 /// The index modulo to accent graduations (= 5 by default)
 RCT_EXPORT_VIEW_PROPERTY(accentGraduationModulo, NSInteger);
 /// The color of the accented graduations (every accentGraduationModulo graduations)
-RCT_EXPORT_VIEW_PROPERTY(bridgeHighGraduationColor, NSNumber);
+//RCT_EXPORT_VIEW_PROPERTY(bridgeHighGraduationColor, NSNumber);
 /// The color of the non accented graduations (every accentGraduationModulo graduations)
-RCT_EXPORT_VIEW_PROPERTY(bridgeSmallGraduationColor, NSNumber);
+//RCT_EXPORT_VIEW_PROPERTY(bridgeSmallGraduationColor, NSNumber);
 /// The width of the accented graduations (every accentGraduationModulo graduations)
 RCT_EXPORT_VIEW_PROPERTY(highGraduationWidth, CGFloat);
 /// The width of the non accented graduations (every accentGraduationModulo graduations)

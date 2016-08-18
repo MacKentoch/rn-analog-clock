@@ -72,7 +72,7 @@ const SwitchCommand = ({ title, value, onValueChange }) => {
   );
 };
 
-const ColorCommand = ({ title, value, onChange }) => {
+const ColorCommand = ({ title, value, onChange, editable }) => {
   return (
     <View style={styles.command}>
       <Text style={styles.cmdInfo}>
@@ -80,6 +80,7 @@ const ColorCommand = ({ title, value, onChange }) => {
       </Text>
       <TextInput
         style={[styles.cmdInput, styles.textInput]}
+        editable={editable}
         onChangeText={onChange}
         value={value}
       />
@@ -134,7 +135,7 @@ class AnalogClockDEMO extends Component {
       borderAlpha: 1.0,
       faceBackgroundColor: '#26A65B',
       faceBackgroundAlpha: 1.0,
-      digitColor: '#FFFFFF',
+      digitColor: '#F1F1F1',
       digitOffset: 8.0,
       hourHandColor: '#F1F1F1',
       hourHandAlpha: 1.0,
@@ -155,8 +156,6 @@ class AnalogClockDEMO extends Component {
       hubAlpha: 1,
       hubRadius: 3,
       accentGraduationModulo: 5,
-      bridgeHighGraduationColor: '#F1F1F1',
-      bridgeSmallGraduationColor: '#F1F1F1',
       highGraduationWidth: 2.0,
       smallGraduationWidth: 1.0,
       highGraduationLength: 10.0,
@@ -179,7 +178,7 @@ class AnalogClockDEMO extends Component {
     const { minuteHandColor, minuteHandAlpha, minuteHandWidth, minuteHandLength, minuteHandOffsideLength } = this.state;
     const { secondHandColor, secondHandAlpha, secondHandWidth, secondHandLength, secondHandOffsideLength } = this.state;
     const { hubColor, hubAlpha, hubRadius } = this.state;
-    const { accentGraduationModulo, bridgeHighGraduationColor, bridgeSmallGraduationColor, highGraduationWidth, smallGraduationWidth, highGraduationLength, smallGraduationLength } = this.state;
+    const { accentGraduationModulo, highGraduationWidth, smallGraduationWidth, highGraduationLength, smallGraduationLength } = this.state;
     return (
       <View style={styles.container}>
         <Text style={styles.title}>
@@ -259,8 +258,6 @@ class AnalogClockDEMO extends Component {
             hubRadius={hubRadius}
             // GRADUATIONS CUSTOMIZATION
             accentGraduationModulo={accentGraduationModulo}
-            bridgeHighGraduationColor={bridgeHighGraduationColor}
-            bridgeSmallGraduationColor={bridgeSmallGraduationColor}
             highGraduationWidth={highGraduationWidth}
             smallGraduationWidth={smallGraduationWidth}
             highGraduationLength={highGraduationLength}
@@ -350,8 +347,9 @@ class AnalogClockDEMO extends Component {
             onValueChange={(value) => this.setState({digitOffset: value })}
           />
           <ColorCommand
-            title={'digitColor'}
+            title={'digitColor (* non editable)'}
             value={digitColor}
+            editable={false}
             onChange={(value) => this.setState({digitColor: value})}
           />
           <SliderCommand
@@ -549,18 +547,6 @@ class AnalogClockDEMO extends Component {
             value={accentGraduationModulo}
             onValueChange={(value) => this.setState({accentGraduationModulo: value })}
           />
-          {/* bridgeHighGraduationColor */}
-          {/* <ColorCommand
-            title={'bridgeHighGraduationColor'}
-            value={bridgeHighGraduationColor}
-            onChange={(value) => this.setState({bridgeHighGraduationColor: value})}
-          /> */}
-          {/* bridgeSmallGraduationColor */}
-          {/* <ColorCommand
-            title={'bridgeSmallGraduationColor'}
-            value={bridgeSmallGraduationColor}
-            onChange={(value) => this.setState({bridgeSmallGraduationColor: value})}
-          /> */}
           {/* highGraduationLength */}
           <SliderCommand
             title={`highGraduationLength (${(highGraduationLength + '').slice(0, 4)})`}
