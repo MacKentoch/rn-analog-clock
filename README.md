@@ -75,9 +75,10 @@ render() {
   return (
     <AnalogClock
       ref={(ref)=>{this.analogClock = ref;}}
-      style={styles.clock}
-      width={160}
-      height={160}
+      style={[
+        {height: 140, width: 140,backgroundColor: 'transparent'},
+        styles.clockOpt
+      ]}
       // PROPERTIES
       hours={hours}
       minutes={minutes}

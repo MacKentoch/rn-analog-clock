@@ -211,9 +211,10 @@ class AnalogClockDEMO extends Component {
           </Text>
           <AnalogClock
             ref={(ref)=>{this.analogClock = ref;}}
-            style={styles.clock}
-            width={160}
-            height={160}
+            style={[
+              {height: 140, width: 140,backgroundColor: 'transparent'},
+              styles.clockOpt
+            ]}
             // PROPERTIES
             hours={hours}
             minutes={minutes}
@@ -675,12 +676,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center'
   },
-  clock: {
+  clockMin: {
     // minimum style suggested -->
     height: 140,
     width: 140,
     backgroundColor: 'transparent',
-    // <-- minimum style suggested
+  },
+  clockOpt: {
     marginTop: 15,
     marginBottom: 15,
   },
