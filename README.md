@@ -75,10 +75,11 @@ render() {
   return (
     <AnalogClock
       ref={(ref)=>{this.analogClock = ref;}}
-      style={[
-        {height: 140, width: 140,backgroundColor: 'transparent'},
-        styles.clockOpt
-      ]}
+      style={{
+        height: 140,
+        width: 140,
+        backgroundColor: 'transparent'}
+      }
       // PROPERTIES
       hours={hours}
       minutes={minutes}
@@ -149,11 +150,8 @@ render() {
 
 ## Next?
 ### to add
-- [ ] add => JS side defaultProps
+- [x] add => JS side defaultProps
 - [ ] add => `digit font` prop bridge
-- [x] add => `graduations length` prop bridge
-- [x] add => `graduations width` prop bridge
-- [ ] add => `graduations color` prop bridge
 
 ### to fix
 - [ ] fix =>  `digit color` dynamic change throws error (*only initial assignment is ok*)

@@ -74,8 +74,6 @@ class AnalogClock extends Component {
       hubRadius,
       // GRADUATIONS CUSTOMIZATION
       accentGraduationModulo,
-      bridgeHighGraduationColor,
-      bridgeSmallGraduationColor,
       highGraduationWidth,
       smallGraduationWidth,
       highGraduationLength,
@@ -103,40 +101,38 @@ class AnalogClock extends Component {
       bridgeDigitColor={processColor(digitColor)}
       bridgeDigitOffset={parseFloat(digitOffset) ? parseFloat(digitOffset) : getDefaultProps().digitOffset}
       bridgeBorderColor={processColor(borderColor)}
-      bridgeBorderAlpha={parseFloat(borderAlpha) ? parseFloat(borderAlpha) : 0}
-      bridgeBorderWidth={parseFloat(borderWidth) ? parseFloat(borderWidth) : 0}
+      bridgeBorderAlpha={parseFloat(borderAlpha) ? parseFloat(borderAlpha) : getDefaultProps().borderAlpha}
+      bridgeBorderWidth={parseFloat(borderWidth) ? parseFloat(borderWidth) : getDefaultProps().borderWidth}
       bridgeFaceBackgroundColor={processColor(faceBackgroundColor)}
-      bridgeFaceBackgroundAlpha={parseFloat(faceBackgroundAlpha) ? parseFloat(faceBackgroundAlpha) : 0}
+      bridgeFaceBackgroundAlpha={parseFloat(faceBackgroundAlpha) ? parseFloat(faceBackgroundAlpha) : getDefaultProps().faceBackgroundAlpha}
       // HOURS HAND CUSTOMIZATION
       bridgeHourHandColor={processColor(hourHandColor)}
-      bridgeHourHandAlpha={parseFloat(hourHandAlpha) ? parseFloat(hourHandAlpha) : 1.0}
-      bridgeHourHandWidth={parseFloat(hourHandWidth) ? parseFloat(hourHandWidth) : 4.0}
-      bridgeHourHandLength={parseFloat(hourHandLength) ? parseFloat(hourHandLength) : 30}
-      bridgeHourHandOffsideLength={parseFloat(hourHandOffsideLength) ? parseFloat(hourHandOffsideLength) : 10}
+      bridgeHourHandAlpha={parseFloat(hourHandAlpha) ? parseFloat(hourHandAlpha) : getDefaultProps().hourHandAlpha}
+      bridgeHourHandWidth={parseFloat(hourHandWidth) ? parseFloat(hourHandWidth) : getDefaultProps().hourHandWidth}
+      bridgeHourHandLength={parseFloat(hourHandLength) ? parseFloat(hourHandLength) : getDefaultProps().hourHandLength}
+      bridgeHourHandOffsideLength={parseFloat(hourHandOffsideLength) ? parseFloat(hourHandOffsideLength) : getDefaultProps().hourHandOffsideLength}
       // MINUTES HAND CUSTOMIZATION
       bridgeMinuteHandColor={processColor(minuteHandColor)}
-      bridgeMinuteHandAlpha={parseFloat(minuteHandAlpha) ? parseFloat(minuteHandAlpha) : 1.0}
-      bridgeMinuteHandWidth={parseFloat(minuteHandWidth) ? parseFloat(minuteHandWidth) : 3.0}
-      bridgeMinuteHandLength={parseFloat(minuteHandLength) ? parseFloat(minuteHandLength) : 55}
-      bridgeMinuteHandOffsideLength={parseFloat(minuteHandOffsideLength) ? parseFloat(minuteHandOffsideLength) : 20}
+      bridgeMinuteHandAlpha={parseFloat(minuteHandAlpha) ? parseFloat(minuteHandAlpha) : getDefaultProps().minuteHandAlpha}
+      bridgeMinuteHandWidth={parseFloat(minuteHandWidth) ? parseFloat(minuteHandWidth) : getDefaultProps().minuteHandWidth}
+      bridgeMinuteHandLength={parseFloat(minuteHandLength) ? parseFloat(minuteHandLength) : getDefaultProps().minuteHandLength}
+      bridgeMinuteHandOffsideLength={parseFloat(minuteHandOffsideLength) ? parseFloat(minuteHandOffsideLength) : getDefaultProps().minuteHandOffsideLength}
       // SECONDS HAND CUSTOMIZATION
       bridgeSecondHandColor={processColor(secondHandColor)}
-      bridgeSecondHandAlpha={parseFloat(secondHandAlpha) ? parseFloat(secondHandAlpha) : 1.0}
-      bridgeSecondHandWidth={parseFloat(secondHandWidth) ? parseFloat(secondHandWidth) : 1.0}
-      bridgeSecondHandLength={parseFloat(secondHandLength) ? parseFloat(secondHandLength) : 60}
-      bridgeSecondHandOffsideLength={parseFloat(secondHandOffsideLength) ? parseFloat(secondHandOffsideLength) : 20}
+      bridgeSecondHandAlpha={parseFloat(secondHandAlpha) ? parseFloat(secondHandAlpha) : getDefaultProps().secondHandAlpha}
+      bridgeSecondHandWidth={parseFloat(secondHandWidth) ? parseFloat(secondHandWidth) : getDefaultProps().secondHandWidth}
+      bridgeSecondHandLength={parseFloat(secondHandLength) ? parseFloat(secondHandLength) : getDefaultProps().secondHandLength}
+      bridgeSecondHandOffsideLength={parseFloat(secondHandOffsideLength) ? parseFloat(secondHandOffsideLength) : getDefaultProps().secondHandOffsideLength}
       // HUB CUSTOMIZATION
       bridgeHubColor={processColor(hubColor)}
-      bridgeHubAlpha={parseFloat(hubAlpha) ? parseFloat(hubAlpha) : 1.0}
-      bridgeHubRadius={parseFloat(hubRadius) ? parseFloat(hubRadius) : 3.0}
+      bridgeHubAlpha={parseFloat(hubAlpha) ? parseFloat(hubAlpha) : getDefaultProps().hubAlpha}
+      bridgeHubRadius={parseFloat(hubRadius) ? parseFloat(hubRadius) : getDefaultProps().hubRadius}
       // GRADUATIONS CUSTOMIZATION
-      accentGraduationModulo={parseInt(accentGraduationModulo, 10) ? parseInt(accentGraduationModulo, 10) : 5}
-      bridgeHighGraduationColor={processColor(bridgeHighGraduationColor)}
-      bridgeSmallGraduationColor={processColor(bridgeSmallGraduationColor)}
-      highGraduationWidth={parseFloat(highGraduationWidth) ? parseFloat(highGraduationWidth) : 2.0}
-      smallGraduationWidth={parseFloat(smallGraduationWidth) ? parseFloat(smallGraduationWidth) : 1.0}
-      highGraduationLength={parseFloat(highGraduationLength) ? parseFloat(highGraduationLength) : 10.0}
-      smallGraduationLength={parseFloat(smallGraduationLength) ? parseFloat(smallGraduationLength) : 5.0}
+      accentGraduationModulo={parseInt(accentGraduationModulo, 10) ? parseInt(accentGraduationModulo, 10) : getDefaultProps().accentGraduationModulo}
+      highGraduationWidth={parseFloat(highGraduationWidth) ? parseFloat(highGraduationWidth) : getDefaultProps().highGraduationWidth}
+      smallGraduationWidth={parseFloat(smallGraduationWidth) ? parseFloat(smallGraduationWidth) : getDefaultProps().smallGraduationWidth}
+      highGraduationLength={parseFloat(highGraduationLength) ? parseFloat(highGraduationLength) : getDefaultProps().highGraduationLength}
+      smallGraduationLength={parseFloat(smallGraduationLength) ? parseFloat(smallGraduationLength) : getDefaultProps().smallGraduationLength}
       {...otherProps}
     />
     );
@@ -275,10 +271,6 @@ AnalogClock.propTypes = {
   /////////////////////////////////////////
   /// The index modulo to accent graduations (= 5 by default)
   accentGraduationModulo: PropTypes.number,
-  /// The color of the accented graduations (every accentGraduationModulo graduations)
-  bridgeHighGraduationColor: PropTypes.string,
-  /// The color of the non accented graduations (every accentGraduationModulo graduations)
-  bridgeSmallGraduationColor: PropTypes.string,
   /// The width of the accented graduations (every accentGraduationModulo graduations)
   highGraduationWidth: PropTypes.number,
   /// The width of the non accented graduations (every accentGraduationModulo graduations)
@@ -304,10 +296,50 @@ AnalogClock.defaultProps = {
   hours: getDefaultProps().hours,
   minutes: getDefaultProps().minutes,
   seconds: getDefaultProps().seconds,
+  enableShadows: getDefaultProps().enableShadows,
+  realTime: getDefaultProps().realTime,
+  militaryTime: getDefaultProps().militaryTime,
+  currentTime: getDefaultProps().currentTime,
+  enableDigit: getDefaultProps().enableDigit,
+  setTimeViaTouch: getDefaultProps().setTimeViaTouch,
+  enableGraduations: getDefaultProps().enableGraduations,
+  enableHub: getDefaultProps().enableHub,
   // CLOCK'S FACE CUSTOMIZATION
+  borderColor: getDefaultProps().borderColor,
+  borderAlpha: getDefaultProps().borderAlpha,
+  borderWidth: getDefaultProps().borderWidth,
+  digitColor: getDefaultProps().digitColor,
   digitOffset: getDefaultProps().digitOffset,
+  faceBackgroundColor: getDefaultProps().faceBackgroundColor,
+  faceBackgroundAlpha: getDefaultProps().faceBackgroundAlpha,
+  // HOURS HAND CUSTOMIZATION
+  hourHandColor: getDefaultProps().hourHandColor,
+  hourHandAlpha: getDefaultProps().hourHandAlpha,
+  hourHandWidth: getDefaultProps().hourHandWidth,
+  hourHandLength: getDefaultProps().hourHandLength,
+  hourHandOffsideLength: getDefaultProps().hourHandOffsideLength,
+  // MINUTES HAND CUSTOMIZATION
+  minuteHandColor: getDefaultProps().minuteHandColor,
+  minuteHandAlpha: getDefaultProps().minuteHandAlpha,
+  minuteHandWidth: getDefaultProps().minuteHandWidth,
+  minuteHandLength: getDefaultProps().minuteHandLength,
+  minuteHandOffsideLength: getDefaultProps().minuteHandOffsideLength,
+  // SECONDS HAND CUSTOMIZATION
+  secondHandColor:  getDefaultProps().secondHandColor,
+  secondHandAlpha: getDefaultProps().secondHandAlpha,
+  secondHandWidth: getDefaultProps().secondHandWidth,
+  secondHandLength: getDefaultProps().secondHandLength,
+  secondHandOffsideLength: getDefaultProps().secondHandOffsideLength,
+  // HUB CUSTOMIZATION
+  hubColor: getDefaultProps().hubColor,
+  hubAlpha: getDefaultProps().hubAlpha,
+  hubRadius: getDefaultProps().hubRadius,
   // GRADUATIONS CUSTOMIZATION
-  accentGraduationModulo: getDefaultProps().accentGraduationModulo
+  accentGraduationModulo: getDefaultProps().accentGraduationModulo,
+  highGraduationWidth: getDefaultProps().highGraduationWidth,
+  smallGraduationWidth: getDefaultProps().smallGraduationWidth,
+  highGraduationLength: getDefaultProps().highGraduationLength,
+  smallGraduationLength: getDefaultProps().smallGraduationLength
 };
 
 function getDefaultProps() {
@@ -316,10 +348,50 @@ function getDefaultProps() {
     hours: 0,
     minutes: 0,
     seconds: 0,
+    enableShadows: true,
+    realTime: false,
+    militaryTime: false,
+    currentTime: false,
+    enableDigit: false,
+    setTimeViaTouch: false,
+    enableGraduations: true,
+    enableHub: false,
     // CLOCK'S FACE CUSTOMIZATION
+    borderColor: '',
+    borderAlpha: 1,
+    borderWidth: 0,
+    digitColor: '',
     digitOffset: 8,
+    faceBackgroundColor: '',
+    faceBackgroundAlpha: '',
+    // HOURS HAND CUSTOMIZATION
+    hourHandColor: '#FFFFFF',
+    hourHandAlpha: 1.0,
+    hourHandWidth: 4.0,
+    hourHandLength: 30,
+    hourHandOffsideLength: 10,
+    // MINUTES HAND CUSTOMIZATION
+    minuteHandColor: '#FFFFFF',
+    minuteHandAlpha: 1.0,
+    minuteHandWidth: 3.0,
+    minuteHandLength: 55,
+    minuteHandOffsideLength: 20,
+    // SECONDS HAND CUSTOMIZATION
+    secondHandColor: '#FFFFFF',
+    secondHandAlpha: 1.0,
+    secondHandWidth: 1.0,
+    secondHandLength: 60,
+    secondHandOffsideLength: 20,
+    // HUB CUSTOMIZATION
+    hubColor: '#FFFFFF',
+    hubAlpha: 1.0,
+    hubRadius: 3.0,
     // GRADUATIONS CUSTOMIZATION
-    accentGraduationModulo: 5
+    accentGraduationModulo: 5,
+    highGraduationWidth: 2.0,
+    smallGraduationWidth: 1.0,
+    highGraduationLength: 10.0,
+    smallGraduationLength: 5.0
   };
 }
 

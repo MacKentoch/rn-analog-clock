@@ -83,7 +83,7 @@ RCT_EXPORT_MODULE()
 }
 
 - (UIColor *)analogClock:(BEMAnalogClockView *)clock graduationColorForIndex:(NSInteger)index {
-  return _AnalogClock.digitColor; // graduation color is digit color
+  return _AnalogClock.digitColor; // graduation color equals digit color
 }
 
 #pragma mark - properties export
