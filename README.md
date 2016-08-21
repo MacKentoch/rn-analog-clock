@@ -2,9 +2,6 @@
 # react-native-analog-clock
 
 
-*__IMPORTANT__* : **Work in progress** (*at early stage*), stay tuned!
-
-
 ##### React native analog clock as a nice alternative to traditional timepicker.
 
 This component is a bridge over `native`  [BEMAnalogClock](https://github.com/Boris-Em/BEMAnalogClock)
@@ -18,7 +15,7 @@ This component is a bridge over `native`  [BEMAnalogClock](https://github.com/Bo
 
 *See this full example source [here](https://github.com/MacKentoch/rn-analog-clock/blob/master/example/index.ios.js)*
 
-## Getting started
+## Install
 
 **IMPORTANT:** this component is `build with React Native 0.30+` (*not tested with lower versions of RN*).
 
@@ -31,6 +28,8 @@ npm i --save react-native-analog-clock
 ```bash
 react-native link
 ```
+
+## Use
 
 ### import AnalogClock component
 
@@ -53,7 +52,7 @@ render() {
 }
 ```
 
-**A super power example:**
+**A super complete example:**
 
 ```javascript
 import AnalogClock from 'react-native-analog-clock';
@@ -124,8 +123,6 @@ render() {
       hubRadius={hubRadius}
       // GRADUATIONS CUSTOMIZATION
       accentGraduationModulo={accentGraduationModulo}
-      bridgeHighGraduationColor={bridgeHighGraduationColor}
-      bridgeSmallGraduationColor={bridgeSmallGraduationColor}
       highGraduationWidth={highGraduationWidth}
       smallGraduationWidth={smallGraduationWidth}
       highGraduationLength={highGraduationLength}
@@ -148,11 +145,98 @@ render() {
 *[follow this complete example for more details](https://github.com/MacKentoch/rn-analog-clock/blob/master/example/index.ios.js)*
 
 
+## Properties
+
+### General Clock Properties:
+| Property name | type | Description |
+| --- | --- | --- |
+| **hours** | *number* | manually define hours |
+| **minutes** | *number* | manually define minutes |
+| **seconds** | *number* | manually define seconds |
+| **enableShadows** | *bool* | If set to true, the hands will cast a shadow. *`Default` value is `true`.* |
+| **realTime** | *bool* | If set to true, the clock will be updated in real time (the second hand will move every second, the minute hand every minute...). *`Default` value is `false`* |
+| **militaryTime** | *bool* | If set to true, the clock time will support military time. *`Default` value is `false`*. |
+| **currentTime** | *bool* | If set to true, the clock will be set to the current time on the phone. Prioritized over setting the time manually. *`Default` value is `false`.* |
+| **enableDigit** | *bool* | If set to true, the digits (1-12) will be displayed on the face of the clock. *`Default` value is `false`.* |
+| **setTimeViaTouch** | *bool* | If set to true, the clock time can be updated via touch inputs. *`Default` value is `false`.* |
+| **enableGraduations** | *bool* | If set to true, the graduation on the clock will be visible. See the methods bellow to customize the graduations. *`Default` value is `true`.* |
+| **enableHub** | *bool* | If set to true, a circular hub will be drawn. *`Default` value is `false`* |
+
+### Current time callback:
+| Name | Parameter | Parameter details |
+| --- | --- | --- |
+| **onTimeChange** | *object* | {hours, minutes, seconds} |
+
+###  Clock's face customizations:
+| Property name | type | Description |
+| --- | --- | --- |
+| **borderColor** | *string* | The color of the clock's border *(ex: 'blue', '#F1F1F1'...)*. |
+| **borderAlpha** | *number* | The alpha of the clock's border. |
+| **borderWidth** | *number* | The width of the clock's border. |
+| **digitColor** | *string* | The color of the digits appearing inside the clock *(ex: 'blue', '#F1F1F1'...)*. *WARNING: `this property should be constant`* |
+| **digitOffset** | *number* | The offset for the position of the digits on the clock's face. A value >0 will make the digits appear further away from the center of the clock. A valut <0 will make them closer to the center of the clock. *`Default` value is `0.0`.* |
+| **faceBackgroundColor** | *string* | The background color of the clock's face *(ex: 'blue', '#F1F1F1'...)*. |
+| **faceBackgroundAlpha** | *number* | The alpha of the clock's face. |
+
+###  Hours hand customizations:
+| Property name | type | Description |
+| --- | --- | --- |
+| **hourHandColor** | *string* | The color of the clock's hour hand. *`Default` value is `white`.* |
+| **hourHandAlpha** | *number* | The alpha of the clock's hour hand. *`Default` value is `1.0`.* |
+| **hourHandWidth** | *number* | The width of the clock's hour hand. *`Default` value is `4.0`.* |
+| **hourHandLength** | *number* | The length of the clock's hour hand. *`Default` value is `30`.* |
+| **hourHandOffsideLength** | *number* | The length of the offside part of the clock's hour hand. *`Default` value is `10`.* |
+
+###  Minutes hand customizations:
+| Property name | type | Description |
+| --- | --- | --- |
+| **minuteHandColor** | *string* | The color of the clock's minute hand. *`Default` value is `white`.* |
+| **minuteHandAlpha** | *number* | The alpha of the clock's minute hand. *`Default` value is `1.0`.* |
+| **minuteHandWidth** | *number* | The width of the clock's minute hand. *`Default` value is `3.0`.* |
+| **minuteHandLength** | *number* | The length of the clock's minute hand. *`Default` value is `55`.* |
+| **minuteHandOffsideLength** | *number* | The length of the offside part of the clock's minute hand. *`Default` value is `20`.* |
+
+###  Seconds hand customizations:
+| Property name | type | Description |
+| --- | --- | --- |
+| **secondHandColor** | *string* | The color of the clock's second hand. *`Default` value is `white`.* |
+| **secondHandAlpha** | *number* | The alpha of the clock's second hand. *`Default` value is `1.0`.* |
+| **secondHandWidth** | *number* | The width of the clock's second hand. *`Default` value is `1.0`.* |
+| **secondHandLength** | *number* | The length of the clock's second hand. *`Default` value is `60`.* |
+| **secondHandOffsideLength** | *number* | The length of the offside part of the clock's second hand. *`Default` value is `20`.* |
+
+###  Hub customizations:
+| Property name | type | Description |
+| --- | --- | --- |
+| **hubColor** | *string* | The color of the clock's hub. *`Default` value is `white`.* |
+| **hubAlpha** | *number* | The alpha of the clock's hub. *`Default` value is `1.0`.* |
+| **hubRadius** | *number* | The width of the clock's hub. *`Default` value is `3.0`.* |
+
+###  Graduation customizations:
+| Property name | type | Description |
+| --- | --- | --- |
+| **accentGraduationModulo** | *number* | The index modulo to accent graduations. *`Default` is `5` (= every 5 graduations)* |
+| **highGraduationWidth** | *number* | The width of the accented graduations (every accentGraduationModulo graduations). *`Default` is `2.0`.* |
+| **smallGraduationWidth** | *number* | The width of the non accented graduations (every accentGraduationModulo graduations). *`Default` is `1.0`.* |
+| **highGraduationLength** | *number* | The length of the accented graduations (every accentGraduationModulo graduations). *`Default` is `10.0`.* |
+| **smallGraduationLength** | *number* | The length of the non accented graduations (every accentGraduationModulo graduations). *`Default` is `5.0`.* |
+
+> Note: graduations color property is not available but shares the same value as digitColor.
+
 ## Next?
 ### to add
 - [x] add => JS side defaultProps
 - [ ] add => `digit font` prop bridge
 
-### to fix
-- [ ] fix =>  `digit color` dynamic change throws error (*only initial assignment is ok*)
-- [ ] fix => perf.
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) 2016 Erwan DATIN
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
