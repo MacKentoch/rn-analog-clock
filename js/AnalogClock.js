@@ -363,7 +363,7 @@ function getDefaultProps() {
     digitColor: '',
     digitOffset: 8,
     faceBackgroundColor: '',
-    faceBackgroundAlpha: '',
+    faceBackgroundAlpha: 0.0,
     // HOURS HAND CUSTOMIZATION
     hourHandColor: '#FFFFFF',
     hourHandAlpha: 1.0,
