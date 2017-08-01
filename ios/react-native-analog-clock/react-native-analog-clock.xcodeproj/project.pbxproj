@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0DA0D75A1D5FA776005382B0 /* react_native_analog_clock.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0DA0D7591D5FA776005382B0 /* react_native_analog_clock.h */; };
-		0DA0D75C1D5FA776005382B0 /* react_native_analog_clock.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA0D75B1D5FA776005382B0 /* react_native_analog_clock.m */; };
 		0DA0D76A1D5FA7A6005382B0 /* BEMAnalogClockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA0D7631D5FA7A6005382B0 /* BEMAnalogClockView.m */; };
 		0DA0D76B1D5FA7A6005382B0 /* KSMHand.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA0D7651D5FA7A6005382B0 /* KSMHand.m */; };
 		0DA0D76C1D5FA7A6005382B0 /* RNAnalogClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DA0D7671D5FA7A6005382B0 /* RNAnalogClock.m */; };
@@ -22,7 +20,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				0DA0D75A1D5FA776005382B0 /* react_native_analog_clock.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -30,8 +27,6 @@
 
 /* Begin PBXFileReference section */
 		0DA0D7561D5FA776005382B0 /* libreact-native-analog-clock.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libreact-native-analog-clock.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0DA0D7591D5FA776005382B0 /* react_native_analog_clock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = react_native_analog_clock.h; sourceTree = "<group>"; };
-		0DA0D75B1D5FA776005382B0 /* react_native_analog_clock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = react_native_analog_clock.m; sourceTree = "<group>"; };
 		0DA0D7621D5FA7A6005382B0 /* BEMAnalogClockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAnalogClockView.h; sourceTree = "<group>"; };
 		0DA0D7631D5FA7A6005382B0 /* BEMAnalogClockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAnalogClockView.m; sourceTree = "<group>"; };
 		0DA0D7641D5FA7A6005382B0 /* KSMHand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSMHand.h; sourceTree = "<group>"; };
@@ -77,8 +72,6 @@
 				0DA0D7671D5FA7A6005382B0 /* RNAnalogClock.m */,
 				0DA0D7681D5FA7A6005382B0 /* RNAnalogClockManager.h */,
 				0DA0D7691D5FA7A6005382B0 /* RNAnalogClockManager.m */,
-				0DA0D7591D5FA776005382B0 /* react_native_analog_clock.h */,
-				0DA0D75B1D5FA776005382B0 /* react_native_analog_clock.m */,
 			);
 			path = "react-native-analog-clock";
 			sourceTree = "<group>";
@@ -154,7 +147,6 @@
 				0DA0D76B1D5FA7A6005382B0 /* KSMHand.m in Sources */,
 				0DA0D76D1D5FA7A6005382B0 /* RNAnalogClockManager.m in Sources */,
 				0DA0D76A1D5FA7A6005382B0 /* BEMAnalogClockView.m in Sources */,
-				0DA0D75C1D5FA776005382B0 /* react_native_analog_clock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
