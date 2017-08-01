@@ -9,11 +9,31 @@
 
 #import "RNAnalogClock.h"
 #import "RNAnalogClockManager.h"
+#if __has_include(<React/RCTBridge.h>)
+#import <React/RCTBridge.h>
+#else // Compatibility for RN version < 0.40
 #import "RCTBridge.h"
+#endif
+#if __has_include(<React/RCTUIManager.h>)
+#import <React/RCTUIManager.h>
+#else // Compatibility for RN version < 0.40
 #import "RCTUIManager.h"
+#endif
+#if __has_include(<React/RCTViewManager.h>)
+#import <React/RCTUIManager.h>
+#else // Compatibility for RN version < 0.40
 #import "RCTViewManager.h"
+#endif
+#if __has_include(<React/UIView+React.h>)
+#import <React/UIView+React.h>
+#else // Compatibility for RN version < 0.40
 #import "UIView+React.h"
+#endif
+#if __has_include(<React/RCTConvert.h>)
+#import <React/RCTConvert.h>
+#else // Compatibility for RN version < 0.40
 #import "RCTConvert.h"
+#endif
 
 @interface RNAnalogClockManager() <BEMAnalogClockDelegate>
 

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#if __has_include(<React/RCTComponent.h>)
+#import <React/RCTComponent.h>
+#else // Compatibility for RN version < 0.40
 #import "RCTComponent.h"
+#endif
 #import "BEMAnalogClockView.h"
 
 @interface RNAnalogClock: BEMAnalogClockView

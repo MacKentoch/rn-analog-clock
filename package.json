@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/MacKentoch/rn-analog-clock.git"
   },
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "React native analog clock as a nice alternative to traditional timepicker.",
   "author": "Erwan DATIN (http://www.erwan-datin.com/)",
   "nativePackage": true,
@@ -33,7 +33,7 @@
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-react-native": "^3.0.1",
     "flow-bin": "^0.51.1",
-    "react": "16.0.0-alpha.12",
+    "react": "^16.0.0-alpha.12",
     "react-native": "^0.46.4"
   }
 }
