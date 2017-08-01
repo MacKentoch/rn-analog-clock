@@ -3069,8 +3069,8 @@ react-devtools-core@2.3.1:
     ws "^2.0.3"
 
 "react-native-analog-clock@https://github.com/MacKentoch/rn-analog-clock":
-  version "0.3.0"
-  resolved "https://github.com/MacKentoch/rn-analog-clock#24ae72cbb048c4aab96dd9a43d8e184554002bfe"
+  version "0.3.1"
+  resolved "https://github.com/MacKentoch/rn-analog-clock#cad31a3ba44e5e3d80098e7796b1a080d844c596"
 
 react-native@0.46.4:
   version "0.46.4"
