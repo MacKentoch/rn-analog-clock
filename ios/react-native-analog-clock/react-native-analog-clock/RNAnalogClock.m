@@ -7,7 +7,12 @@
 //
 #import <UIKit/UIKit.h>
 #import "RNAnalogClock.h"
+#if __has_include(<React/RCTConvert.h>)
+#import <React/RCTConvert.h>
+#else // Compatibility for RN version < 0.40
 #import "RCTConvert.h"
+#endif
+
 
 
 @implementation RNAnalogClock {
